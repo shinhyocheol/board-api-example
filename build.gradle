@@ -28,6 +28,7 @@ dependencies {
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	runtimeOnly 'org.webjars:bootstrap:4.5.0'
 	
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 }
 
 test {

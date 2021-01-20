@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -30,10 +31,26 @@ public class BoardController {
 		return "board/post.html"; 
 	}
 	
-	@PostMapping("/post")
+	@PostMapping(value = {"/post"})
     public String write(BoardDto boardDto) {
 		boardService.savePost(boardDto);
         return "redirect:/";
     }
 	
+	@GetMapping(value = {"/post/{id}"})
+	public String detail(@PathVariable long id, Model model) {
+		BoardDto boardDto = boardService.getPost(id); 
+		model.addAttribute("post", boardDto);
+		return "board/detail.html";
+	}
+	
+	@GetMapping(value = {"/post/edit/{id}"})
+	public String edit(@PathVariable long id, Model model) {
+		
+		BoardDto boardDto = boardService.getPost(id);
+		model.addAttribute("post", boardDto);
+		
+		return "board/edit.html";
+		
+	}
 }
