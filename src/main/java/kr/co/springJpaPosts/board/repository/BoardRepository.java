@@ -1,4 +1,4 @@
-package kr.co.springJpaPosts.board.domain.repository;
+package kr.co.springJpaPosts.board.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
