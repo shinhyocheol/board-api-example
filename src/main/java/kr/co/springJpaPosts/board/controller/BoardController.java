@@ -4,9 +4,11 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import kr.co.springJpaPosts.board.dto.BoardDto;
@@ -53,4 +55,19 @@ public class BoardController {
 		return "board/edit.html";
 		
 	}
+	
+	@PutMapping(value = {"/post/edit/{id}"})
+	public String modify(@PathVariable long id, 
+			BoardDto setBoard, 
+			Model model) {
+		boardService.savePost(setBoard);
+		return "redirect:/";
+	}
+	
+	@DeleteMapping(value = {"/post/{id}"})
+	public String delete(@PathVariable long id) {
+		boardService.deletePost(id);
+		return "redirect:/";
+	}
+	
 }
