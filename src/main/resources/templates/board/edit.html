@@ -26,7 +26,7 @@
         <div class="form-group row">
             <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
             <div class="col-sm-10">
-                <textarea type="text" name="content" class="form-control" id="inputContent" th:value="${post.content}"></textarea>
+                <textarea type="text" name="content" th:field="*{post.content}" class="form-control" id="inputContent" th:value="${post.content}"></textarea>
             </div>
         </div>
         <div class="row">
