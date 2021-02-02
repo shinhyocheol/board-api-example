@@ -8,7 +8,7 @@
 <body>
 <header th:insert="common/header.html"></header>
 <div class="container">
-    <form th:action="@{'/post/edit/' + ${post.id}}" method="post">
+    <form th:action="@{'/post/edit/' + ${post.id}}" method="PUT">
         <input type="hidden" name="_method" value="put"/>
         <input type="hidden" name="id" th:value="${post.id}"/>
         <div class="form-group row">
@@ -26,7 +26,7 @@
         <div class="form-group row">
             <label for="inputContent" class="col-sm-2 col-form-label"><strong>내용</strong></label>
             <div class="col-sm-10">
-                <textarea type="text" name="content" class="form-control" id="inputContent" th:value="${post.content}"></textarea>
+                <input type="text" name="content" class="form-control" id="inputContent" th:value="${post.content}">
             </div>
         </div>
         <div class="row">
