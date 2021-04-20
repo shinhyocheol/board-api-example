@@ -2,7 +2,7 @@ package kr.co.springJpaPosts.board.dto;
 
 import java.time.LocalDateTime;
 
-import kr.co.springJpaPosts.board.entity.Board;
+import kr.co.springJpaPosts.board.domain.entity.Board;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

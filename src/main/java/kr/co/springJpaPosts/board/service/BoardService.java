@@ -7,8 +7,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import kr.co.springJpaPosts.board.dto.BoardDto;
-import kr.co.springJpaPosts.board.entity.Board;
-import kr.co.springJpaPosts.board.repository.BoardRepository;
+import kr.co.springJpaPosts.board.domain.entity.Board;
+import kr.co.springJpaPosts.board.domain.repository.BoardRepository;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -18,12 +18,14 @@ public class BoardService {
     private BoardRepository boardRepository;
 
     @Transactional
-    public Long savePost(BoardDto boardDto) {
+    public Long savePosts(
+            BoardDto boardDto) {
+
     	return boardRepository.save(boardDto.toEntity()).getId();
     }
     
     @Transactional
-    public List<BoardDto> getBoardList() {
+    public List<BoardDto> getPostsList() {
         
     	List<Board> boardList = boardRepository.findAll();
         List<BoardDto> boardDtoList = new ArrayList<>();
@@ -42,7 +44,7 @@ public class BoardService {
     }
     
     @Transactional
-    public BoardDto getPost(Long id) {
+    public BoardDto getPosts(Long id) {
     	
     	Board board = boardRepository.findById(id).get();
     	
@@ -57,8 +59,9 @@ public class BoardService {
     	return boardDto;
     }
 
-	public void deletePost(long id) {
-		boardRepository.deleteById(id);
+	public void deletePosts(long id) {
+
+        boardRepository.deleteById(id);
 	}
     
     

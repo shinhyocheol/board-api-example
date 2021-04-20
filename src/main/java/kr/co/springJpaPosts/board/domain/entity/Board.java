@@ -1,4 +1,4 @@
-package kr.co.springJpaPosts.board.entity;
+package kr.co.springJpaPosts.board.domain.entity;
 
 import java.time.LocalDateTime;
 

@@ -23,33 +23,42 @@ public class BoardController {
 	
 	@GetMapping(value = {"/"})
 	public String list(Model model) {
-		List<BoardDto> boardDtoList = boardService.getBoardList();
+		List<BoardDto> boardDtoList = boardService.getPostsList();
         model.addAttribute("postList", boardDtoList);
         return "board/list.html";
 	}
 	
 	@GetMapping(value = {"/post"})
 	public String post() {
-		return "board/post.html"; 
+
+		return "board/post.html";
 	}
 	
 	@PostMapping(value = {"/post"})
     public String write(BoardDto boardDto) {
-		boardService.savePost(boardDto);
-        return "redirect:/";
+
+		boardService.savePosts(boardDto);
+
+		return "redirect:/";
     }
 	
 	@GetMapping(value = {"/post/{id}"})
-	public String detail(@PathVariable long id, Model model) {
-		BoardDto boardDto = boardService.getPost(id); 
+	public String detail(
+			@PathVariable long id,
+			Model model) {
+
+		BoardDto boardDto = boardService.getPosts(id);
 		model.addAttribute("post", boardDto);
+
 		return "board/detail.html";
 	}
 	
 	@GetMapping(value = {"/post/edit/{id}"})
-	public String edit(@PathVariable long id, Model model) {
+	public String edit(
+			@PathVariable long id,
+			Model model) {
 		
-		BoardDto boardDto = boardService.getPost(id);
+		BoardDto boardDto = boardService.getPosts(id);
 		model.addAttribute("post", boardDto);
 		
 		return "board/edit.html";
@@ -57,16 +66,21 @@ public class BoardController {
 	}
 	
 	@PutMapping(value = {"/post/edit/{id}"})
-	public String modify(@PathVariable long id, 
+	public String modify(
+			@PathVariable long id,
 			BoardDto setBoard, 
 			Model model) {
-		boardService.savePost(setBoard);
+
+		boardService.savePosts(setBoard);
+
 		return "redirect:/";
 	}
 	
 	@DeleteMapping(value = {"/post/{id}"})
 	public String delete(@PathVariable long id) {
-		boardService.deletePost(id);
+
+		boardService.deletePosts(id);
+
 		return "redirect:/";
 	}
 	
