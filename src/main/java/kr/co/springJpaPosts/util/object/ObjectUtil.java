@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class ObjectUtil {
 
-    private ModelMapper modelMapper;
+    private static ModelMapper modelMapper;
 
     /**
      * @Method 설명 : entity의 데이터들을 dto로 modelmapper 라이브러리를 통해 할당함.
@@ -16,7 +16,7 @@ public class ObjectUtil {
      * @param <V> Entity 타입의 제네릭 변수
      * @return
      */
-    public <T, V> T toDto(V entity, Class<T> dto) {
+    public static <T, V> T toDto(V entity, Class<T> dto) {
 
         return dto.cast(modelMapper.map(entity, dto));
     }

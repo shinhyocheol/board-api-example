@@ -1,4 +1,4 @@
-package kr.co.springJpaPosts.board.dto;
+package kr.co.springJpaPosts.posts.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 @NoArgsConstructor
-public class BoardResDto {
+public class PostsResDto {
 
     private Long id;
     private String author;
