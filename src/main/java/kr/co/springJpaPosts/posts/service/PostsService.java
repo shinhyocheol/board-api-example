@@ -18,6 +18,8 @@ public class PostsService {
 	
     private PostsRepository postsRepository;
 
+    private ObjectUtil objectUtil;
+
     @Transactional
     public Long savePosts(
             PostsDto postsDto) {
@@ -31,7 +33,7 @@ public class PostsService {
     	List<Posts> entityList = postsRepository.findAll();
 
         return entityList.stream()
-                .map(entity -> ObjectUtil.toDto(entity, PostsDto.class))
+                .map(entity -> objectUtil.toDto(entity, PostsDto.class))
                 .collect(Collectors.toList());
     }
     
@@ -41,7 +43,7 @@ public class PostsService {
     	Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Result Not Found"));
     	
-    	return ObjectUtil.toDto(entity, PostsDto.class);
+    	return objectUtil.toDto(entity, PostsDto.class);
     }
 
 	public void deletePosts(Long id) {
