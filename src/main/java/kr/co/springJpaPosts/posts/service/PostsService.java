@@ -3,6 +3,7 @@ package kr.co.springJpaPosts.posts.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import kr.co.springJpaPosts.posts.dto.PostsResDto;
 import kr.co.springJpaPosts.util.object.ObjectUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -28,22 +29,22 @@ public class PostsService {
     }
     
     @Transactional
-    public List<PostsDto> getPostsList() {
+    public List<PostsResDto> getPostsService() {
         
     	List<Posts> entityList = postsRepository.findAll();
 
         return entityList.stream()
-                .map(entity -> objectUtil.toDto(entity, PostsDto.class))
+                .map(entity -> objectUtil.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
     }
     
     @Transactional
-    public PostsDto getPosts(Long id) {
+    public PostsResDto getPostsByIdService(Long id) {
     	
     	Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Result Not Found"));
     	
-    	return objectUtil.toDto(entity, PostsDto.class);
+    	return objectUtil.toDto(entity, PostsResDto.class);
     }
 
 	public void deletePosts(Long id) {

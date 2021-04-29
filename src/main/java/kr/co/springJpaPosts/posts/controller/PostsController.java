@@ -3,6 +3,7 @@ package kr.co.springJpaPosts.posts.controller;
 import java.util.List;
 
 
+import kr.co.springJpaPosts.posts.dto.PostsResDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,26 +21,20 @@ public class PostsController {
 	private PostsService postsService;
 	
 	@GetMapping(value = {""})
-	public ResponseEntity<List<PostsDto>> getPosts() {
+	public ResponseEntity<List<PostsResDto>> getPosts() {
 
 		return ResponseEntity.ok()
-				 			 .body(postsService.getPostsList());
+				 			 .body(postsService.getPostsService());
 	}
-	
-//	@GetMapping(value = {"/post"})
-//	public String post() {
-//
-//		return "board/post.html";
-//	}
-//
-//	@PostMapping(value = {"/post"})
-//    public String write(BoardDto boardDto) {
-//
-//		boardService.savePosts(boardDto);
-//
-//		return "redirect:/";
-//    }
-//
+
+	@GetMapping(value = {"/{id}"})
+	public ResponseEntity<PostsResDto> getPostsDetail(
+			@PathVariable Long id) {
+
+		return ResponseEntity.ok()
+							 .body(postsService.getPostsByIdService(id));
+	}
+
 //	@GetMapping(value = {"/post/{id}"})
 //	public String detail(
 //			@PathVariable Long id,
