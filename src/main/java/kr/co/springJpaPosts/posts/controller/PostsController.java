@@ -46,17 +46,6 @@ public class PostsController {
 //		return "board/detail.html";
 //	}
 //
-//	@GetMapping(value = {"/post/edit/{id}"})
-//	public String edit(
-//			@PathVariable Long id,
-//			Model model) {
-//
-//		BoardDto boardDto = boardService.getPosts(id);
-//		model.addAttribute("post", boardDto);
-//
-//		return "board/edit.html";
-//
-//	}
 //
 //	@PutMapping(value = {"/post/edit/{id}"})
 //	public String modify(
