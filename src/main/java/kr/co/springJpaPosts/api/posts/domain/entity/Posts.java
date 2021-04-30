@@ -1,4 +1,4 @@
-package kr.co.springJpaPosts.board.entity;
+package kr.co.springJpaPosts.api.posts.domain.entity;
 
 import java.time.LocalDateTime;
 
@@ -21,7 +21,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class) /* JPA 에게 해당 Entity는 Auditiong 기능을 사용함을 알림 */
-public class Board {
+public class Posts {
 
 	@Id
 	@GeneratedValue
@@ -44,7 +44,7 @@ public class Board {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public Board(Long id, String author, String title, String content) {
+    public Posts(Long id, String author, String title, String content) {
         this.id = id;
         this.author = author;
         this.title = title;
