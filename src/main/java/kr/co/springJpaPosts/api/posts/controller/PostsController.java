@@ -1,17 +1,17 @@
-package kr.co.springJpaPosts.posts.controller;
+package kr.co.springJpaPosts.api.posts.controller;
 
 import java.util.List;
 
 
-import kr.co.springJpaPosts.posts.dto.PostsRegDto;
-import kr.co.springJpaPosts.posts.dto.PostsResDto;
-import kr.co.springJpaPosts.posts.dto.PostsSetDto;
+import kr.co.springJpaPosts.api.posts.dto.PostsRegDto;
+import kr.co.springJpaPosts.api.posts.dto.PostsResDto;
+import kr.co.springJpaPosts.api.posts.dto.PostsSetDto;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
-import kr.co.springJpaPosts.posts.service.PostsService;
+import kr.co.springJpaPosts.api.posts.service.PostsService;
 import lombok.AllArgsConstructor;
 
 @RestController

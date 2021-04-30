@@ -1,12 +1,10 @@
-package kr.co.springJpaPosts.posts.dto;
+package kr.co.springJpaPosts.api.posts.dto;
 
-import kr.co.springJpaPosts.posts.domain.entity.Posts;
+import kr.co.springJpaPosts.api.posts.domain.entity.Posts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
-import java.time.LocalDateTime;
 
 @Getter
 @Setter

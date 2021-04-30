@@ -1,8 +1,8 @@
-package kr.co.springJpaPosts.posts.domain.repository;
+package kr.co.springJpaPosts.api.posts.domain.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import kr.co.springJpaPosts.posts.domain.entity.Posts;
+import kr.co.springJpaPosts.api.posts.domain.entity.Posts;
 
 /**
  * Repository는 데이터 조작을 담당하며, Jpa Repository를 상속받는다.

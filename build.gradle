@@ -22,9 +22,11 @@ dependencies {
 
 	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
 	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+	compile 'net.sf.json-lib:json-lib:2.4:jdk15'
 
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.springframework.boot:spring-boot-starter-undertow'

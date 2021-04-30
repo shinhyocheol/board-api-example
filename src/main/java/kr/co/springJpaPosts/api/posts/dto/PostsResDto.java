@@ -1,4 +1,4 @@
-package kr.co.springJpaPosts.posts.dto;
+package kr.co.springJpaPosts.api.posts.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

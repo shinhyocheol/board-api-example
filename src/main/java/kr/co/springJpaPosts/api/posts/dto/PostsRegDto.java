@@ -1,8 +1,8 @@
-package kr.co.springJpaPosts.posts.dto;
+package kr.co.springJpaPosts.api.posts.dto;
 
 import java.time.LocalDateTime;
 
-import kr.co.springJpaPosts.posts.domain.entity.Posts;
+import kr.co.springJpaPosts.api.posts.domain.entity.Posts;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
