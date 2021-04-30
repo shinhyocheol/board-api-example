@@ -8,7 +8,7 @@ import kr.co.springJpaPosts.util.object.ObjectUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.co.springJpaPosts.posts.dto.PostsDto;
+import kr.co.springJpaPosts.posts.dto.PostsRegDto;
 import kr.co.springJpaPosts.posts.domain.entity.Posts;
 import kr.co.springJpaPosts.posts.domain.repository.PostsRepository;
 import lombok.AllArgsConstructor;
@@ -23,7 +23,7 @@ public class PostsService {
 
     @Transactional
     public Long savePosts(
-            PostsDto postsDto) {
+            PostsRegDto postsDto) {
 
     	return postsRepository.save(postsDto.toEntity()).getId();
     }

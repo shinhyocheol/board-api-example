@@ -8,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import kr.co.springJpaPosts.posts.dto.PostsDto;
 import kr.co.springJpaPosts.posts.service.PostsService;
 import lombok.AllArgsConstructor;
 
@@ -26,6 +25,10 @@ public class PostsController {
 		return ResponseEntity.ok()
 				 			 .body(postsService.getPostsService());
 	}
+
+	@PostMapping(value = {""})
+	public ResponseEntity<Long> regPosts(
+			)
 
 	@GetMapping(value = {"/{id}"})
 	public ResponseEntity<PostsResDto> getPostsDetail(

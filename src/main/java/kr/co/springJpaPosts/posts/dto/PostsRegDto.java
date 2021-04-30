@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 @NoArgsConstructor
-public class PostsDto {
+public class PostsRegDto {
 
 	private Long id;
 	private String author;
