@@ -14,7 +14,6 @@ import lombok.ToString;
 @NoArgsConstructor
 public class PostsRegDto {
 
-	private Long id;
 	private String author;
 	private String title;
 	private String content;
@@ -23,7 +22,6 @@ public class PostsRegDto {
 
 	public Posts toEntity() {
 		Posts build = Posts.builder()
-				.id(id)
 				.author(author)
 				.title(title)
 				.content(content)

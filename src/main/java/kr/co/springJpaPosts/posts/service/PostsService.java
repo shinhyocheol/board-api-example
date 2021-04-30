@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kr.co.springJpaPosts.posts.dto.PostsResDto;
+import kr.co.springJpaPosts.posts.dto.PostsSetDto;
 import kr.co.springJpaPosts.util.object.ObjectUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,11 +22,11 @@ public class PostsService {
 
     private ObjectUtil objectUtil;
 
-    @Transactional
-    public Long savePosts(
-            PostsRegDto postsDto) {
+    public Long regPostsService(PostsRegDto regPosts) {
 
-    	return postsRepository.save(postsDto.toEntity()).getId();
+        Long insertId = postsRepository.save(regPosts.toEntity()).getId();
+
+        return insertId;
     }
     
     @Transactional
@@ -47,11 +48,17 @@ public class PostsService {
     	return objectUtil.toDto(entity, PostsResDto.class);
     }
 
+    public Long setPostsService(PostsSetDto setPosts) {
+
+        Long id = postsRepository.save(setPosts.toEntity()).getId();
+
+        return id;
+    }
+
 	public void deletePosts(Long id) {
 
         postsRepository.deleteById(id);
 
 	}
-    
-    
+
 }
