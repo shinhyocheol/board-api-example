@@ -3,22 +3,25 @@ package kr.co.springJpaPosts.api.posts.dto;
 import java.time.LocalDateTime;
 
 import kr.co.springJpaPosts.api.posts.domain.entity.Posts;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
+
+import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
+@AllArgsConstructor
 public class PostsRegDto {
 
+	@NotBlank(message = "'author' is a required input value")
 	private String author;
+
+	@NotBlank(message = "'title' is a required input value")
 	private String title;
+
+	@NotBlank(message = "'content' is a required input value")
 	private String content;
-	private LocalDateTime createdDate;
-	private LocalDateTime modifiedDate;
 
 	public Posts toEntity() {
 		Posts build = Posts.builder()

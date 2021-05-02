@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-@Service("apiSignService")
+@Service("signService")
 @AllArgsConstructor
 public class SignService {
 

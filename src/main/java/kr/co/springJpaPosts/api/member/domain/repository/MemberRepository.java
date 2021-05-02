@@ -13,6 +13,6 @@ public interface MemberRepository extends JpaRepository<Members, Long> {
     @Query(value =
             "select count(*) " +
                     "from members " +
-                    "where member_id = :memberId ", nativeQuery = true)
+                    "where email = :email ", nativeQuery = true)
     Integer countByEmail(String email);
 }

@@ -80,7 +80,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 					.antMatchers("/signup").permitAll()			// 회원가입
 					.antMatchers("/signin/**").permitAll() 		// 로그인
 					.antMatchers("/exception/**").permitAll() 	// 예외처리 포인트
-					.anyRequest().hasRole("USER")							// 이외 나머지는 권한 필요하지만 픽폰에서 권한레벨은 사용되지 않고 관리자도 분리되어 있으므로 USER 권한을 부여하였음
+					.anyRequest().permitAll()
+					//.anyRequest().hasRole("USER")							// 이외 나머지는 권한 필요하지만 픽폰에서 권한레벨은 사용되지 않고 관리자도 분리되어 있으므로 USER 권한을 부여하였음
 				.and()
 			.cors()
 				.and()

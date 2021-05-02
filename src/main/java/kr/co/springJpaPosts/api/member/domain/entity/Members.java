@@ -12,7 +12,6 @@ import java.time.LocalDateTime;
 
 @Getter
 @Entity
-@Builder
 @DynamicUpdate
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
@@ -30,13 +29,13 @@ public class Members {
     private String password;
 
     @Column(length = 100, nullable = false)
-    private String memberName;
+    private String name;
 
     @Column(length = 100, nullable = false)
-    private String mobileNumber;
+    private String mobile;
 
     @Column(length = 100, nullable = true)
-    private String memberNickname;
+    private String nickname;
 
     @CreatedDate
     @Column(updatable = false)
@@ -44,6 +43,17 @@ public class Members {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+
+    @Builder
+    public Members(Long id, String email, String password,
+                   String name, String mobile, String nickname) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.mobile = mobile;
+        this.nickname = nickname;
+    }
 
 
 }

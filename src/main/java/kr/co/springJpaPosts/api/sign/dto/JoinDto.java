@@ -12,15 +12,19 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class JoinDto {
 
-    @NotBlank(message = "'memberId' is a required input value")
+    @NotBlank(message = "'email' is a required input value")
     private String email;
 
+    @NotBlank(message = "'password' is a required input value")
     private String password;
 
-    private String memberName;
+    @NotBlank(message = "'name' is a required input value")
+    private String name;
 
-    private String memberNickname;
+    @NotBlank(message = "'nickname' is a required input value")
+    private String nickname;
 
-    private String mobileNumber;
+    @NotBlank(message = "'mobile' is a required input value")
+    private String mobile;
 
 }
