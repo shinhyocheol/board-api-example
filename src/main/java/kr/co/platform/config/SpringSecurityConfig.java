@@ -46,7 +46,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		configuration.addAllowedMethod("*");
 		configuration.addAllowedHeader("*");
 		configuration.setMaxAge((long) 3600);
-		configuration.setAllowCredentials(true);
+		configuration.setAllowCredentials(false);
 		configuration.addExposedHeader("x-access-token");
 		configuration.addExposedHeader("content-disposition");
 
