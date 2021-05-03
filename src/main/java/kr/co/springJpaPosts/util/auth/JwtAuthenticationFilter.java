@@ -1,8 +1,11 @@
 package kr.co.springJpaPosts.util.auth;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpInputMessage;
+import org.springframework.http.server.ServletServerHttpRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.FilterChain;
@@ -12,6 +15,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.InputStream;
 
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends GenericFilterBean {
@@ -35,6 +39,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
             if("OPTIONS".equalsIgnoreCase(httpReq.getMethod())) {
                 httpRes.setStatus(HttpServletResponse.SC_OK);
             } else {
+
                 String token = jwtTokenProvider.resolveToken(httpReq);
                 if (token != null) {
                     if(jwtTokenProvider.validateToken(token)) {
@@ -44,8 +49,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                         SecurityContextHolder.getContext().setAuthentication(auth);
                     }
                 }
+                filterChain.doFilter(request, response);
+
             }
-            filterChain.doFilter(request, response);
+
         } catch (Exception e) {
             e.printStackTrace();
         }

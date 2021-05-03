@@ -54,7 +54,7 @@ public class PostsController {
 							 .body(postsService.setPostsService(setPosts));
 	}
 
-	@DeleteMapping(value = {"/post/{id}"})
+	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<String> delPosts(
 			@PathVariable Long id) {
 

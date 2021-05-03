@@ -91,14 +91,14 @@ class SpringJpaPostsApplicationTests {
 //
 //	}
 
-	@Test
-	void contextLoads_게시판_글_삭제() throws Exception {
-
-		mockMvc.perform(delete("/posts/1"))
-				.andDo(print())
-				.andExpect(status().isOk());
-
-	}
+//	@Test
+//	void contextLoads_게시판_글_삭제() throws Exception {
+//
+//		mockMvc.perform(delete("/posts/1"))
+//				.andDo(print())
+//				.andExpect(status().isOk());
+//
+//	}
 
 
 }
