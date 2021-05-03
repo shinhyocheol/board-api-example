@@ -1,11 +1,15 @@
 package kr.co.platform;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.co.platform.api.posts.dto.PostsRegDto;
+import kr.co.platform.api.posts.dto.PostsSetDto;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
@@ -16,6 +20,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 
 @SpringBootTest
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -38,62 +44,60 @@ class SpringJpaApplicationTests {
 				.build();
 	}
 
-//	@Test
-//	void contextLoads_게시판_글_등록() throws Exception {
-//
-//		PostsRegDto posts = new PostsRegDto("작성자", "테스트 제목", "테스트 본문");
-//
-//		String content = objectMapper.writeValueAsString(posts);
-//
-//		mockMvc.perform(post("/posts")
-//				.content(content)
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andDo(print())
-//				.andExpect(status().isOk());
-//
-//	}
+	@Test
+	void contextLoads_게시판_글_목록조회() throws Exception{
 
+		mockMvc.perform(get("/posts"))
+		.andDo(print())
+		.andExpect(status().isOk());
 
-//	@Test
-//	void contextLoads_게시판_글_목록조회() throws Exception{
-//
-//		mockMvc.perform(get("/posts"))
-//		.andDo(print())
-//		.andExpect(status().isOk());
-//
-//	}
+	}
 
-//	@Test
-//	void contextLoads_게시판_글_상세조회() throws Exception {
-//
-//		mockMvc.perform(get("/posts/1"))
-//				.andDo(print())
-//				.andExpect(status().isOk());
-//
-//	}
+	@Test
+	void contextLoads_게시판_글_상세조회() throws Exception {
 
-//	@Test
-//	void contextLoads_게시판_글_수정() throws Exception {
-//		PostsSetDto posts = new PostsSetDto((long)1, "수정자", "제목 수정 테스트", "본문 수정 테스트");
-//		String content = objectMapper.writeValueAsString(posts);
-//		mockMvc.perform(put("/posts/1")
-//				.content(content)
-//				.contentType(MediaType.APPLICATION_JSON)
-//				.accept(MediaType.APPLICATION_JSON))
-//				.andDo(print())
-//				.andExpect(status().isOk());
-//
-//	}
+		mockMvc.perform(get("/posts/3"))
+				.andDo(print())
+				.andExpect(status().isOk());
 
-//	@Test
-//	void contextLoads_게시판_글_삭제() throws Exception {
-//
-//		mockMvc.perform(delete("/posts/1"))
-//				.andDo(print())
-//				.andExpect(status().isOk());
-//
-//	}
+	}
 
+	@Test
+	void contextLoads_게시판_글_등록() throws Exception {
+
+		PostsRegDto posts = new PostsRegDto("등록테스트중", "테스트 제목", "테스트 본문");
+
+		String content = objectMapper.writeValueAsString(posts);
+
+		mockMvc.perform(post("/posts")
+				.content(content)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	void contextLoads_게시판_글_수정() throws Exception {
+		PostsSetDto posts = new PostsSetDto((long)3, "수정테스트중", "제목 수정 테스트", "본문 수정 테스트");
+		String content = objectMapper.writeValueAsString(posts);
+		mockMvc.perform(put("/posts/3")
+				.content(content)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
+
+	}
+
+	@Test
+	void contextLoads_게시판_글_삭제() throws Exception {
+
+		mockMvc.perform(delete("/posts/3"))
+				.andDo(print())
+				.andExpect(status().isOk());
+
+	}
 
 }

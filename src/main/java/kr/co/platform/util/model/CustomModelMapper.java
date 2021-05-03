@@ -1,14 +1,15 @@
-package kr.co.platform.util.object;
+package kr.co.platform.util.model;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ObjectUtil {
+public class CustomModelMapper {
 
     private ModelMapper modelMapper;
 
-    public ObjectUtil(ModelMapper modelMapper) {
+    public CustomModelMapper(ModelMapper modelMapper) {
+
         this.modelMapper = modelMapper;
     }
 

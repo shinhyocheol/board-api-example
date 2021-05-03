@@ -9,7 +9,7 @@ import kr.co.platform.util.advice.exception.DuplicatedException;
 import kr.co.platform.util.advice.exception.ForbiddenException;
 import kr.co.platform.util.advice.exception.UserNotFoundException;
 import kr.co.platform.util.empty.Empty;
-import kr.co.platform.util.object.ObjectUtil;
+import kr.co.platform.util.model.CustomModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -30,7 +30,7 @@ public class SignService {
 
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	private ObjectUtil objUtil;
+	private CustomModelMapper objUtil;
 
 	public void joinService(JoinDto joinDto) {
 

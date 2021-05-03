@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.PostsSetDto;
-import kr.co.platform.util.object.ObjectUtil;
+import kr.co.platform.util.model.CustomModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -20,7 +20,7 @@ public class PostsService {
 	
     private PostsRepository postsRepository;
 
-    private ObjectUtil objectUtil;
+    private CustomModelMapper customModelMapper;
 
     public Long regPostsService(PostsRegDto regPosts) {
 
@@ -35,7 +35,7 @@ public class PostsService {
     	List<Posts> entityList = postsRepository.findAll();
 
         return entityList.stream()
-                .map(entity -> objectUtil.toDto(entity, PostsResDto.class))
+                .map(entity -> customModelMapper.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
     }
     
@@ -45,7 +45,7 @@ public class PostsService {
     	Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Result Not Found"));
     	
-    	return objectUtil.toDto(entity, PostsResDto.class);
+    	return customModelMapper.toDto(entity, PostsResDto.class);
     }
 
     public Long setPostsService(PostsSetDto setPosts) {
