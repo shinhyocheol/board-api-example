@@ -6,6 +6,9 @@ import java.util.stream.Collectors;
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.PostsSetDto;
 import kr.co.platform.util.model.CustomModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,13 +33,16 @@ public class PostsService {
     }
     
     @Transactional
-    public List<PostsResDto> getPostsService() {
-        
-    	List<Posts> entityList = postsRepository.findAll();
+    public PageImpl<PostsResDto> getPostsService(PageRequest pageble) {
 
-        return entityList.stream()
+
+    	Page<Posts> entityList = postsRepository.findAll(pageble);
+
+    	List<PostsResDto> result = entityList.stream()
                 .map(entity -> customModelMapper.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
+
+        return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
     }
     
     @Transactional

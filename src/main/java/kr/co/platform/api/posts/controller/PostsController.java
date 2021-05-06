@@ -6,6 +6,9 @@ import java.util.List;
 import kr.co.platform.api.posts.dto.PostsRegDto;
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.PostsSetDto;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,10 +26,11 @@ public class PostsController {
 	private PostsService postsService;
 	
 	@GetMapping(value = {""})
-	public ResponseEntity<List<PostsResDto>> getPosts() {
-
+	public ResponseEntity<PageImpl<PostsResDto>> getPosts(
+			@RequestParam Integer page) {
+		PageRequest pageble = PageRequest.of(page - 1, 10);
 		return ResponseEntity.ok()
-				 			 .body(postsService.getPostsService());
+				 			 .body(postsService.getPostsService(pageble));
 	}
 
 	@PostMapping(value = {""})
