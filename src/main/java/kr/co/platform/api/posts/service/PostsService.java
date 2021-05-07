@@ -5,6 +5,8 @@ import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.PostsSetDto;
+import kr.co.platform.util.advice.exception.ApiOtherException;
+import kr.co.platform.util.empty.Assert;
 import kr.co.platform.util.model.CustomModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -32,36 +34,31 @@ public class PostsService {
         return insertId;
     }
     
-    @Transactional
     public PageImpl<PostsResDto> getPostsService(PageRequest pageble) {
-
 
     	Page<Posts> entityList = postsRepository.findAll(pageble);
 
     	List<PostsResDto> result = entityList.stream()
                 .map(entity -> customModelMapper.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
-
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
     }
     
-    @Transactional
     public PostsResDto getPostsByIdService(Long id) {
     	
     	Posts entity = postsRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Result Not Found"));
+                .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
     	return customModelMapper.toDto(entity, PostsResDto.class);
     }
 
-    public Long setPostsService(PostsSetDto setPosts) {
+    public void setPostsService(PostsSetDto setPosts) {
 
-        Long id = postsRepository.save(setPosts.toEntity()).getId();
+        postsRepository.save(setPosts.toEntity());
 
-        return id;
     }
 
-	public void deletePosts(Long id) {
+	public void delPostsService(Long id) {
 
         postsRepository.deleteById(id);
 

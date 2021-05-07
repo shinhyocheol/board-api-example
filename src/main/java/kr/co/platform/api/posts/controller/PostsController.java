@@ -50,22 +50,24 @@ public class PostsController {
 	}
 
 	@PutMapping(value = {"/{id}"})
-	public ResponseEntity<Long> setPosts(
+	public ResponseEntity<String> setPosts(
 			@PathVariable Long id,
 			@Valid @RequestBody PostsSetDto setPosts) throws Exception {
 
+		postsService.setPostsService(setPosts);
+
 		return ResponseEntity.ok()
-							 .body(postsService.setPostsService(setPosts));
+							 .body("UPDATE SUCCESS");
 	}
 
 	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<String> delPosts(
 			@PathVariable Long id) {
 
-		postsService.deletePosts(id);
+		postsService.delPostsService(id);
 
 		return ResponseEntity.ok()
-							 .body("SUCCESS");
+							 .body("DELETE SUCCESS");
 	}
 	
 }
