@@ -32,20 +32,24 @@ public class SignService {
 	
 	private CustomModelMapper objUtil;
 
-	public void joinService(JoinDto joinDto) {
+	public AuthenticationDto joinService(JoinDto joinDto) {
 
 		// 아이디 중복체크
 		if (!Empty.validation(memberRepository.countByEmail(joinDto.getEmail())))
 			throw new DuplicatedException("Duplicated Member");
 
+		// 데이터 저장
+		Members member = memberRepository.save(joinDto.toEntity());
 
+		// 회원정보를 인증클래스 객체(authentication)로 매핑
+		AuthenticationDto authentication = objUtil.toDto(member, AuthenticationDto.class);
+
+		return authentication;
 	}
-
 
 	public AuthenticationDto loginService(LoginDto loginDto) {
 
 		// 회원 엔티티 객체 생성 및 조회시작
-
 		Members member = memberRepository.findByEmail(loginDto.getEmail())
 				.orElseThrow(() -> new UserNotFoundException("User Not Found"));
 
@@ -54,7 +58,6 @@ public class SignService {
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑
 		AuthenticationDto authentication = objUtil.toDto(member, AuthenticationDto.class);
-
 
 		return authentication;
 	}

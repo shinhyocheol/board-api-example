@@ -41,6 +41,7 @@ public class PostsService {
     	List<PostsResDto> result = entityList.stream()
                 .map(entity -> customModelMapper.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
+
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
     }
     

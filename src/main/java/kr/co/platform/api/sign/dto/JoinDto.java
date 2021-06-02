@@ -1,10 +1,13 @@
 package kr.co.platform.api.sign.dto;
 
+import kr.co.platform.api.member.domain.entity.Members;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Setter
@@ -12,7 +15,10 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class JoinDto {
 
+    private BCryptPasswordEncoder passwordEncoder;
+
     @NotBlank(message = "'email' is a required input value")
+    @Email(message = "do not email type")
     private String email;
 
     @NotBlank(message = "'password' is a required input value")
@@ -26,5 +32,18 @@ public class JoinDto {
 
     @NotBlank(message = "'mobile' is a required input value")
     private String mobile;
+
+    public Members toEntity() {
+
+        Members build = Members.builder()
+                .email(email)
+                .password(passwordEncoder.encode(password))
+                .name(name)
+                .nickname(nickname)
+                .mobile(mobile)
+                .build();
+
+        return build;
+    }
 
 }

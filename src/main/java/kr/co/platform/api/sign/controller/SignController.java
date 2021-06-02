@@ -25,13 +25,25 @@ public class SignController {
 	private JwtAuthProvider jwtProvider;
 
 	@PostMapping(value = {"signup"})
-	public ResponseEntity<String> appJoin(
+	public ResponseEntity<AuthenticationDto> appJoin(
 			@Valid @RequestBody JoinDto joinDto) throws Exception {
 
-		apiSignService.joinService(joinDto);
+		AuthenticationDto authentication = apiSignService.joinService(joinDto);
+
+		/**
+		 * 회원가입 정상완료 후 해당 정보를 기반으로 로그인을 위해 인증토큰 발행
+		 */
+		CustomUserDetails user = new CustomUserDetails(
+				authentication.getId(), 			// 회원 등록번호
+				authentication.getEmail());			// 회원 아이디
 
 		return ResponseEntity.ok()
-				.body("SUCCESS");
+				.header("x-access-token", jwtProvider
+						.createToken(
+								user.getUserPk(),
+								user.getUsername(),
+								user.getRoles()))
+				.body(authentication);
 	}
 	
 	/**
@@ -40,10 +52,9 @@ public class SignController {
 	 * @return : 회원인증토큰, 회원정보
 	 * @throws Exception
 	 */
-	@PostMapping(value = {"/signin/{UUID}"})
+	@PostMapping(value = {"/signin"})
 	public ResponseEntity<AuthenticationDto> appLogin(
-			@Valid @RequestBody LoginDto loginDto,
-			@PathVariable String UUID) throws Exception {
+			@Valid @RequestBody LoginDto loginDto) throws Exception {
 
 		AuthenticationDto authentication = apiSignService.loginService(loginDto);
 		/**
@@ -52,7 +63,7 @@ public class SignController {
 		 */
 		CustomUserDetails user = new CustomUserDetails(
 				authentication.getId(), 			// 회원 등록번호
-				authentication.getEmail());				// 회원 아이디
+				authentication.getEmail());			// 회원 아이디
 
 		return ResponseEntity.ok()
 				.header("x-access-token", jwtProvider
