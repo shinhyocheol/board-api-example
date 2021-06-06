@@ -10,15 +10,18 @@ import kr.co.platform.util.advice.exception.ForbiddenException;
 import kr.co.platform.util.advice.exception.UserNotFoundException;
 import kr.co.platform.util.empty.Empty;
 import kr.co.platform.util.model.CustomModelMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
+import java.lang.invoke.MethodHandles;
 import java.security.SecureRandom;
 import java.util.Base64;
 
 @Service("signService")
+@Slf4j
 @AllArgsConstructor
 public class SignService {
 
@@ -36,9 +39,16 @@ public class SignService {
 
 		// 아이디 중복체크
 		if (!Empty.validation(memberRepository.countByEmail(joinDto.getEmail())))
-			throw new DuplicatedException("Duplicated Member");
+			throw new DuplicatedException("Duplicated ID");
 
-		// 데이터 저장
+		// 연락처 중복체크
+		if (!Empty.validation(memberRepository.countByMobile(joinDto.getMobile())))
+			throw new DuplicatedException("Duplicated Mobile");
+
+		// 비밀번호 암호화처리
+		joinDto.setPassword(passwordEncoder.encode(joinDto.getPassword()));
+
+		// 데이터 등록
 		Members member = memberRepository.save(joinDto.toEntity());
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑

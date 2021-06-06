@@ -24,6 +24,11 @@ public class SignController {
 	
 	private JwtAuthProvider jwtProvider;
 
+	/**
+	 * @method 설명 : 회원가입
+	 * @param joinDto
+	 * @throws Exception
+	 */
 	@PostMapping(value = {"signup"})
 	public ResponseEntity<AuthenticationDto> appJoin(
 			@Valid @RequestBody JoinDto joinDto) throws Exception {

@@ -14,18 +14,18 @@ import java.time.LocalDateTime;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Members {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Column(length = 100, nullable = false)
     private String email;
 
-    @Column(length = 100, nullable = false)
+    @Column(length = 200, nullable = false)
     private String password;
 
     @Column(length = 100, nullable = false)
