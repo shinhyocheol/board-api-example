@@ -48,22 +48,13 @@ public class SignController {
 			@Valid @RequestBody LoginDto loginDto) throws Exception {
 
 		AuthenticationDto authentication = apiSignService.loginService(loginDto);
-		/**
-		 * 토큰발급을 위한 데이터는 UserDetails에서 담당
-		 * 따라서 UserDetails를 세부 구현한 CustomUserDetails로 회원정보 전달
-		 */
-		CustomUserDetails user = new CustomUserDetails(
-				authentication.getId(), 			// 회원 등록번호
-				authentication.getEmail(),
-				authentication.getNickname());			// 회원 아이디
 
 		return ResponseEntity.ok()
 				.header("x-access-token", jwtProvider
 						.createToken(
-								user.getUserPk(),
-								user.getUsername(),
-								user.getNickname(),
-								user.getRoles()))
+								authentication.getId(),
+								authentication.getEmail(),
+								authentication.getNickname()))
 				.body(authentication);
 	}
 }

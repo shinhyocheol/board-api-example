@@ -45,8 +45,9 @@ public class Members {
     private LocalDateTime modifiedDate;
 
     @Builder
-    public Members(Long id, String email, String password,
-                   String name, String mobile, String nickname) {
+    public Members(Long id, String email, 
+    		String password, String name, 
+    		String mobile, String nickname) {
         this.id = id;
         this.email = email;
         this.password = password;

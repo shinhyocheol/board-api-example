@@ -25,7 +25,7 @@ public class PostsService {
 	
     private PostsRepository postsRepository;
 
-    private CustomModelMapper customModelMapper;
+    private CustomModelMapper modelMapper;
 
     public Long regPostsService(PostsRegDto regPosts) {
 
@@ -39,7 +39,7 @@ public class PostsService {
     	Page<Posts> entityList = postsRepository.findAll(pageble);
 
     	List<PostsResDto> result = entityList.stream()
-                .map(entity -> customModelMapper.toDto(entity, PostsResDto.class))
+                .map(entity -> modelMapper.toDto(entity, PostsResDto.class))
                 .collect(Collectors.toList());
 
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
@@ -50,7 +50,7 @@ public class PostsService {
     	Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
-    	return customModelMapper.toDto(entity, PostsResDto.class);
+    	return modelMapper.toDto(entity, PostsResDto.class);
     }
 
     public void setPostsService(PostsSetDto setPosts) {

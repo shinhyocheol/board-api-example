@@ -35,18 +35,27 @@ public class JwtAuthProvider {
     public String createToken(
             long userPk,
             String email,
-            String nickname,
-            List<String> roles) {
-
-        Date date = new Date();
-
+            String nickname) {
+    	
+    	/**
+    	 * 토큰발급을 위한 데이터는 UserDetails에서 담당
+    	 * 따라서 UserDetails를 세부 구현한 CustomUserDetails로 회원정보 전달
+    	 */
+    	CustomUserDetails user = new CustomUserDetails(
+    			userPk, 	// 번호
+    			email,		// 이메일
+    			nickname);	// 닉네임
+    	
+    	// 유효기간설정을 위한 Date 객체 선언
+    	Date date = new Date();
+        
         final JwtBuilder builder = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))
                 .claim("userPk", userPk)
                 .claim("email", email)
                 .claim("nickname", nickname)
-                .claim("roles", roles)
+                .claim("roles", user.getAuthorities())
                 .signWith(SignatureAlgorithm.HS256, atSecretKey);
 
         return builder.compact();

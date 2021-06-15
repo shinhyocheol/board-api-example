@@ -1,6 +1,7 @@
 package kr.co.platform.api.sign.service;
 
 import kr.co.platform.api.member.domain.entity.Members;
+
 import kr.co.platform.api.member.domain.repository.MemberRepository;
 import kr.co.platform.api.sign.dto.AuthenticationDto;
 import kr.co.platform.api.sign.dto.JoinDto;
@@ -16,7 +17,6 @@ import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
 
-import java.lang.invoke.MethodHandles;
 import java.security.SecureRandom;
 import java.util.Base64;
 
@@ -25,15 +25,11 @@ import java.util.Base64;
 @AllArgsConstructor
 public class SignService {
 
-	private static final SecureRandom secureRandom = new SecureRandom(); //threadsafe
-
-	private static final Base64.Encoder base64Encoder = Base64.getUrlEncoder(); //threadsafe
-
 	private MemberRepository memberRepository;
 
 	private BCryptPasswordEncoder passwordEncoder;
 	
-	private CustomModelMapper objUtil;
+	private CustomModelMapper modelMapper;
 
 	public Boolean joinService(JoinDto joinDto) {
 
@@ -64,7 +60,7 @@ public class SignService {
 			throw new ForbiddenException("Passwords do not match");
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑
-		AuthenticationDto authentication = objUtil.toDto(member, AuthenticationDto.class);
+		AuthenticationDto authentication = modelMapper.toDto(member, AuthenticationDto.class);
 
 		return authentication;
 	}
