@@ -16,15 +16,11 @@ public class AuthenticationDto {
 
     private String email;
 
-    private String memberName;
+    private String name;
 
-    private String memberNickname;
+    private String nickname;
 
-    private String mobileNumber;
-
-    private String memberProfileImg;
-
-    private String memberEmail;
+    private String mobile;
 
     private String regDate;
 

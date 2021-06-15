@@ -35,6 +35,7 @@ public class JwtAuthProvider {
     public String createToken(
             long userPk,
             String email,
+            String nickname,
             List<String> roles) {
 
         Date date = new Date();
@@ -44,6 +45,7 @@ public class JwtAuthProvider {
                 .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))
                 .claim("userPk", userPk)
                 .claim("email", email)
+                .claim("nickname", nickname)
                 .claim("roles", roles)
                 .signWith(SignatureAlgorithm.HS256, atSecretKey);
 
@@ -66,8 +68,9 @@ public class JwtAuthProvider {
 
         long userPk = claims.get("userPk", Integer.class);
         String email = claims.get("email", String.class);
+        String nickname = claims.get("nickname", String.class);
 
-        CustomUserDetails userDetails = new CustomUserDetails(userPk, email);
+        CustomUserDetails userDetails = new CustomUserDetails(userPk, email, nickname);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 

@@ -30,25 +30,11 @@ public class SignController {
 	 * @throws Exception
 	 */
 	@PostMapping(value = {"signup"})
-	public ResponseEntity<AuthenticationDto> appJoin(
+	public ResponseEntity<Boolean> appJoin(
 			@Valid @RequestBody JoinDto joinDto) throws Exception {
 
-		AuthenticationDto authentication = apiSignService.joinService(joinDto);
-
-		/**
-		 * 회원가입 정상완료 후 해당 정보를 기반으로 로그인을 위해 인증토큰 발행
-		 */
-		CustomUserDetails user = new CustomUserDetails(
-				authentication.getId(), 			// 회원 등록번호
-				authentication.getEmail());			// 회원 아이디
-
 		return ResponseEntity.ok()
-				.header("x-access-token", jwtProvider
-						.createToken(
-								user.getUserPk(),
-								user.getUsername(),
-								user.getRoles()))
-				.body(authentication);
+				.body(apiSignService.joinService(joinDto));
 	}
 	
 	/**
@@ -68,13 +54,15 @@ public class SignController {
 		 */
 		CustomUserDetails user = new CustomUserDetails(
 				authentication.getId(), 			// 회원 등록번호
-				authentication.getEmail());			// 회원 아이디
+				authentication.getEmail(),
+				authentication.getNickname());			// 회원 아이디
 
 		return ResponseEntity.ok()
 				.header("x-access-token", jwtProvider
 						.createToken(
 								user.getUserPk(),
 								user.getUsername(),
+								user.getNickname(),
 								user.getRoles()))
 				.body(authentication);
 	}

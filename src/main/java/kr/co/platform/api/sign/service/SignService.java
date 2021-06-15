@@ -35,7 +35,7 @@ public class SignService {
 	
 	private CustomModelMapper objUtil;
 
-	public AuthenticationDto joinService(JoinDto joinDto) {
+	public Boolean joinService(JoinDto joinDto) {
 
 		// 아이디 중복체크
 		if (!Empty.validation(memberRepository.countByEmail(joinDto.getEmail())))
@@ -48,13 +48,10 @@ public class SignService {
 		// 비밀번호 암호화처리
 		joinDto.setPassword(passwordEncoder.encode(joinDto.getPassword()));
 
-		// 데이터 등록
-		Members member = memberRepository.save(joinDto.toEntity());
+		// 데이터 등록(저장)
+		memberRepository.save(joinDto.toEntity());
 
-		// 회원정보를 인증클래스 객체(authentication)로 매핑
-		AuthenticationDto authentication = objUtil.toDto(member, AuthenticationDto.class);
-
-		return authentication;
+		return true;
 	}
 
 	public AuthenticationDto loginService(LoginDto loginDto) {

@@ -1,6 +1,7 @@
 package kr.co.platform.api.posts.dto;
 
 import kr.co.platform.api.posts.domain.entity.Posts;
+import kr.co.platform.util.auth.AuthUtil;
 import lombok.*;
 
 import javax.validation.constraints.NotBlank;
@@ -12,9 +13,6 @@ import javax.validation.constraints.NotBlank;
 @AllArgsConstructor
 public class PostsRegDto {
 
-	@NotBlank(message = "'author' is a required input value")
-	private String author;
-
 	@NotBlank(message = "'title' is a required input value")
 	private String title;
 
@@ -23,7 +21,7 @@ public class PostsRegDto {
 
 	public Posts toEntity() {
 		Posts build = Posts.builder()
-				.author(author)
+				.author(AuthUtil.getNickname())
 				.title(title)
 				.content(content)
 				.build();

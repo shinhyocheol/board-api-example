@@ -7,6 +7,21 @@ import java.util.Collection;
 
 public class AuthUtil {
 
+    public static long getId() {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getUserPk();
+    }
+
+    public static String getEmail() {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getUsername();
+    }
+
+    public static String getNickname() {
+        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return principal.getNickname();
+    }
+
     public static boolean hasRole(String role) {
         @SuppressWarnings("unchecked")
         Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext()
@@ -32,26 +47,6 @@ public class AuthUtil {
             role = authority.getAuthority().replace("ROLE_", "");
         }
         return role;
-    }
-
-    public static String getClientUUID() {
-        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getClientUUID();
-    }
-
-    public static long getClientRegno() {
-        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getClientPk();
-    }
-
-    public static String getMemberId() {
-        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getUsername();
-    }
-
-    public static long getMemberRegno() {
-        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getUserPk();
     }
 
 }

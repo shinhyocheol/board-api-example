@@ -18,21 +18,21 @@ import java.util.stream.Collectors;
 @Setter
 public class CustomUserDetails implements UserDetails {
 
-    private long clientPk;
-    private String clientUUID;
-
     private long userPk;
     private String username;
     private String password;
+    private String nickname;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
 
     public CustomUserDetails(
             long userPk,
-            String username) {
+            String username,
+            String nickname) {
         this.userPk = userPk;
         this.username = username;
+        this.nickname = nickname;
     }
 
     @Override

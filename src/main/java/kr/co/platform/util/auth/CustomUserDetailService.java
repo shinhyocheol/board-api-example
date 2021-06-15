@@ -21,7 +21,7 @@ public class CustomUserDetailService implements UserDetailsService {
         Members entity = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("There is no result data"));
 
-        UserDetails member = new CustomUserDetails(entity.getId(), email);
+        UserDetails member = new CustomUserDetails(entity.getId(), email, entity.getNickname());
 
         return member;
     }
