@@ -15,12 +15,19 @@ import lombok.AllArgsConstructor;
 @CrossOrigin(origins = "*")
 @RequestMapping(value = "/exception")
 public class ExceptionController {
-
+	
+	
+	/**
+	 * @return
+	 */
     @RequestMapping(value = {"/entrypoint"})
     public ResponseEntity<String> entrypointException() {
         throw new AuthenticationEntryPointException();
     }
 
+    /**
+     * @return
+     */
     @RequestMapping(value = {"/accessdenied"})
     public ResponseEntity<String> accessdeniedException() {    	
         throw new AccessDeniedException("");

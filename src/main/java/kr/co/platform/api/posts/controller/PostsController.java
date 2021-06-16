@@ -25,6 +25,11 @@ public class PostsController {
 
 	private PostsService postsService;
 	
+	/**
+	 * @method 설명 : 게시글 목록조회
+	 * @param page
+	 * @return
+	 */
 	@GetMapping(value = {""})
 	public ResponseEntity<PageImpl<PostsResDto>> getPosts(
 			@RequestParam Integer page) {
@@ -33,6 +38,11 @@ public class PostsController {
 				 			 .body(postsService.getPostsService(pageble));
 	}
 
+	/**
+	 * @method 설명 : 게시글 등록
+	 * @param regPosts
+	 * @throws Exception
+	 */
 	@PostMapping(value = {""})
 	public ResponseEntity<Long> regPosts(
 			@Valid @RequestBody PostsRegDto regPosts) throws Exception {
@@ -40,7 +50,12 @@ public class PostsController {
 		return ResponseEntity.ok()
 							 .body(postsService.regPostsService(regPosts));
 	}
-
+	
+	/**
+	 * @method 설명 : 게시글 상세조회
+	 * @param id
+	 * @return
+	 */
 	@GetMapping(value = {"/{id}"})
 	public ResponseEntity<PostsResDto> getPostsDetail(
 			@PathVariable Long id) {
@@ -48,7 +63,13 @@ public class PostsController {
 		return ResponseEntity.ok()
 							 .body(postsService.getPostsByIdService(id));
 	}
-
+	
+	/**
+	 * @method 설명 : 게시글 수정
+	 * @param id
+	 * @param setPosts
+	 * @throws Exception
+	 */
 	@PutMapping(value = {"/{id}"})
 	public ResponseEntity<String> setPosts(
 			@PathVariable Long id,
@@ -59,10 +80,15 @@ public class PostsController {
 		return ResponseEntity.ok()
 							 .body("UPDATE SUCCESS");
 	}
-
+	
+	/**
+	 * @method 설명 : 게시글 삭제
+	 * @param id
+	 * @throws Exception
+	 */
 	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<String> delPosts(
-			@PathVariable Long id) {
+			@PathVariable Long id) throws Exception {
 
 		postsService.delPostsService(id);
 

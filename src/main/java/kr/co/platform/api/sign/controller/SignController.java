@@ -40,7 +40,6 @@ public class SignController {
 	/**
 	 * @method 설명 : 로그인
 	 * @param loginDto
-	 * @return : 회원인증토큰, 회원정보
 	 * @throws Exception
 	 */
 	@PostMapping(value = {"/signin"})
