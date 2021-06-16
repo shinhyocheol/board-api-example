@@ -1,6 +1,7 @@
 package kr.co.platform.util.auth;
 
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import org.springframework.security.access.AccessDeniedException;
@@ -16,8 +17,9 @@ public class CustomAccessDeniedPoint implements AccessDeniedHandler {
     public void handle(
             HttpServletRequest request,
             HttpServletResponse response,
-            AccessDeniedException accessDeniedException) throws IOException, ServletException {
-
+            AccessDeniedException accessDeniedException) 
+            		throws IOException, ServletException {
+    	
         response.sendRedirect("/exception/accessdenied");
     }
 
