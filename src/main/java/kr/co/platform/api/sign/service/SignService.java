@@ -51,12 +51,15 @@ public class SignService {
 	}
 
 	public AuthenticationDto loginService(LoginDto loginDto) {
+		
+		// dto -> entity
+		Members loginEntity = loginDto.toEntity();
 
 		// 회원 엔티티 객체 생성 및 조회시작
-		Members member = memberRepository.findByEmail(loginDto.getEmail())
+		Members member = memberRepository.findByEmail(loginEntity.getEmail())
 				.orElseThrow(() -> new UserNotFoundException("User Not Found"));
 
-		if (!passwordEncoder.matches(loginDto.getPassword(), member.getPassword()))
+		if (!passwordEncoder.matches(loginEntity.getPassword(), member.getPassword()))
 			throw new ForbiddenException("Passwords do not match");
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑
