@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.PostsSetDto;
+import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.util.advice.exception.ApiOtherException;
 import kr.co.platform.util.empty.Assert;
-import kr.co.platform.util.model.CustomModelMapper;
+
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;

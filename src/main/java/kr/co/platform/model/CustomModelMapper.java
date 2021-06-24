@@ -1,4 +1,4 @@
-package kr.co.platform.util.model;
+package kr.co.platform.model;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
