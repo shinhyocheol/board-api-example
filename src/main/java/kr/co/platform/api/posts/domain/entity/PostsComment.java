@@ -5,8 +5,12 @@ import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -14,45 +18,49 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import kr.co.platform.api.member.domain.entity.Members;
 import lombok.AccessLevel;
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-@Getter
-@Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Getter
+@Entity
+@Table(name = "posts_comment")
 @EntityListeners(AuditingEntityListener.class)
-public class Posts {
-
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+public class PostsComment {
+	
 	@Id
 	@GeneratedValue
-	private Long id;
+	@Column(name = "id")
+	private Long commentId;
 	
-	@Column(length = 10, nullable = false)
-	private String author;
+	@Column(length = 200, nullable = true)
+	private String comment;
 	
-	@Column(length = 100, nullable = false)
-    private String title;
-
-    @Column(columnDefinition = "TEXT", nullable = false)
-    private String content;
-
-    @CreatedDate
+	@Column(nullable = false)
+	private Long postsId;
+	
+	@Column(nullable = true)
+	private Long groupNo;
+	
+	@Column(nullable = false)
+	private Long depthNo;
+	
+	@Column(length = 50, nullable = true)
+	private String targetNickname;
+	
+	@CreatedDate
     @Column(updatable = false)
     private LocalDateTime createdDate;
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
+    private Members member;
 
-    @Builder
-    public Posts(Long id, String author, String title, String content) {
-        this.id = id;
-        this.author = author;
-        this.title = title;
-        this.content = content;
-    }
-	
 }
