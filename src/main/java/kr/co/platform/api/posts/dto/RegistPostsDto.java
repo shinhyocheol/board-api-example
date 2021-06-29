@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class PostsRegDto {
+public class RegistPostsDto {
 
 	@NotBlank(message = "'title' is a required input value")
 	private String title;

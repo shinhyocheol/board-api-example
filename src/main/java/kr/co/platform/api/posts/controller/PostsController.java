@@ -3,9 +3,9 @@ package kr.co.platform.api.posts.controller;
 import java.util.List;
 
 
-import kr.co.platform.api.posts.dto.PostsRegDto;
+import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.dto.PostsResDto;
-import kr.co.platform.api.posts.dto.PostsSetDto;
+import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -45,7 +45,7 @@ public class PostsController {
 	 */
 	@PostMapping(value = {""})
 	public ResponseEntity<Long> regPosts(
-			@Valid @RequestBody PostsRegDto regPosts) throws Exception {
+			@Valid @RequestBody RegistPostsDto regPosts) throws Exception {
 
 		return ResponseEntity.ok()
 							 .body(postsService.regPostsService(regPosts));
@@ -73,7 +73,7 @@ public class PostsController {
 	@PutMapping(value = {"/{id}"})
 	public ResponseEntity<String> setPosts(
 			@PathVariable Long id,
-			@Valid @RequestBody PostsSetDto setPosts) throws Exception {
+			@Valid @RequestBody ModifyPostsDto setPosts) throws Exception {
 
 		postsService.setPostsService(setPosts);
 

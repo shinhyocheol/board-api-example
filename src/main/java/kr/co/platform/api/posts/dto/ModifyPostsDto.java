@@ -12,7 +12,7 @@ import javax.validation.constraints.NotBlank;
 @ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
-public class PostsSetDto {
+public class ModifyPostsDto {
 
 
     @Min(1)

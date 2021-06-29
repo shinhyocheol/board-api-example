@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.dto.PostsResDto;
-import kr.co.platform.api.posts.dto.PostsSetDto;
+import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.util.advice.exception.ApiOtherException;
 import kr.co.platform.util.empty.Assert;
@@ -15,7 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import kr.co.platform.api.posts.dto.PostsRegDto;
+import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.api.posts.domain.repository.PostsRepository;
 import lombok.AllArgsConstructor;
@@ -28,7 +28,7 @@ public class PostsService {
 
     private CustomModelMapper modelMapper;
 
-    public Long regPostsService(PostsRegDto regPosts) {
+    public Long regPostsService(RegistPostsDto regPosts) {
 
         Long insertId = postsRepository.save(regPosts.toEntity()).getId();
 
@@ -54,7 +54,7 @@ public class PostsService {
     	return modelMapper.toDto(entity, PostsResDto.class);
     }
 
-    public void setPostsService(PostsSetDto setPosts) {
+    public void setPostsService(ModifyPostsDto setPosts) {
 
         postsRepository.save(setPosts.toEntity());
 
