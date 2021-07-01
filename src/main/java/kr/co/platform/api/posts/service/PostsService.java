@@ -5,6 +5,7 @@ import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.dto.PostsResDto;
+import kr.co.platform.api.posts.dto.CommentResDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.util.advice.exception.ApiOtherException;
@@ -19,9 +20,11 @@ import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
 import kr.co.platform.api.posts.domain.repository.PostsRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service("postsService")
 @AllArgsConstructor
+@Slf4j
 public class PostsService {
 	
     private PostsRepository postsRepository;
@@ -53,9 +56,18 @@ public class PostsService {
     	Posts entity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
-    	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
+    	PostsResDto result = modelMapper.toDto(entity, PostsResDto.class);
+    	
+//    	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
+//    	result.setComments(commentEntitys);
 
-    	return modelMapper.toDto(entity, PostsResDto.class);
+    	// log.debug("CommentEntity : {}", commentEntitys);
+ 	
+    	// result.setComments(commentEntitys.stream()
+		// 									.map(commentEntity -> modelMapper.toDto(commentEntity, CommentResDto.class))
+    	//    								.collect(Collectors.toList()));
+
+    	return result;
     }
 
     public void setPostsService(ModifyPostsDto setPosts) {

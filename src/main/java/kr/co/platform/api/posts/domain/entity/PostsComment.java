@@ -9,7 +9,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
@@ -22,6 +24,7 @@ import kr.co.platform.api.member.domain.entity.Members;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @DynamicUpdate
 @DynamicInsert
@@ -29,7 +32,8 @@ import lombok.NoArgsConstructor;
 @Entity
 @Table(name = "posts_comment")
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@ToString
 public class PostsComment {
 	
 	@Id
@@ -39,9 +43,6 @@ public class PostsComment {
 	
 	@Column(length = 200, nullable = true)
 	private String comment;
-	
-	@Column(nullable = false)
-	private Long postsId;
 	
 	@Column(nullable = true)
 	private Long groupNo;
@@ -53,13 +54,16 @@ public class PostsComment {
 	private String targetNickname;
 	
 	@CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
-
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
+	@Column(updatable = false)
+	private LocalDateTime createdDate;
+	
+	@LastModifiedDate
+	private LocalDateTime modifiedDate;
+	
+    @Column(nullable = false)
+    private Long postsId;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Members member;
 

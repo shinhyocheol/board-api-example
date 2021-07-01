@@ -27,4 +27,8 @@ public class CommentResDto {
 	
 	private LocalDateTime modifiedDate;
 	
+	private String memberId;
+	
+	private String memberNickname;
+	
 }

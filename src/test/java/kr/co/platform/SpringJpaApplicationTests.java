@@ -54,9 +54,9 @@ class SpringJpaApplicationTests {
 //	}
 //
 	@Test
-	void contextLoads_게시판_글_상세조회() throws Exception {
+	void contextLoads_Posts_상세조회() throws Exception {
 
-		mockMvc.perform(get("/posts/15"))
+		mockMvc.perform(get("/posts/5"))
 				.andDo(print())
 				.andExpect(status().isOk());
 

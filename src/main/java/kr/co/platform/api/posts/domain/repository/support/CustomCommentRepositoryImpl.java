@@ -1,6 +1,9 @@
 package kr.co.platform.api.posts.domain.repository.support;
 
+import com.querydsl.core.alias.Alias;
+import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPQLQuery;
 import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
@@ -24,20 +27,23 @@ public class CustomCommentRepositoryImpl extends QuerydslRepositorySupport imple
 		this.queryFactory = queryFactory;
 	}
 	
-	public List<PostsComment> findByPostsId(Long postsId) {
-
-		JPQLQuery<PostsComment> result = queryFactory
-				.select(Projections.fields(PostsComment.class,
-						postsComment.commentId, postsComment.comment,
-						postsComment.targetNickname, postsComment.groupNo,
-						postsComment.depthNo, postsComment.createdDate,
-						postsComment.modifiedDate, members
-						))
-				.from(postsComment)
-					.leftJoin(members)
-						.on(postsComment.member.id.eq(members.id))
-				.where(postsComment.postsId.eq(postsId));
-
-		return result.fetch();
-	}
+//	public List<PostsComment> findByPostsId(Long postsId) {
+//
+//		JPQLQuery<PostsComment> result = queryFactory
+//				.select(Projections.fields(PostsComment.class,
+//						postsComment.commentId, postsComment.comment,
+//						postsComment.targetNickname, postsComment.groupNo,
+//						postsComment.depthNo, postsComment.createdDate,
+//						postsComment.modifiedDate,
+//						members
+////						ExpressionUtils.as(members.id, "memberId"),
+////						ExpressionUtils.as(members.nickname, "memberNickname")
+//						))
+//				.from(postsComment)
+//					.leftJoin(members)
+//						.on(postsComment.member.id.eq(members.id))
+//				.where(postsComment.postsId.eq(postsId));
+//
+//		return result.fetch();
+//	}
 }

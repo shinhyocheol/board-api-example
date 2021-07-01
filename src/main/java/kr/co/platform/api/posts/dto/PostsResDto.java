@@ -6,6 +6,10 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
+import kr.co.platform.api.member.domain.entity.Members;
+import kr.co.platform.api.posts.domain.entity.PostsComment;
 
 @Getter
 @Setter
@@ -19,5 +23,7 @@ public class PostsResDto {
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-
+    private Members member;
+    
+    private List<PostsComment> comments;
 }

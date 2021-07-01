@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EntityListeners(AuditingEntityListener.class)
 public class Members {
 

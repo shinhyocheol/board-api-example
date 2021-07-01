@@ -6,6 +6,6 @@ import java.util.List;
 
 public interface CustomCommentRepository {
 
-    public List<PostsComment> findByPostsId(Long postsId);
+//    public List<PostsComment> findByPostsId(Long postsId);
 
 }
