@@ -47,7 +47,7 @@ public class PostsController {
 	public ResponseEntity<Long> regPosts(
 			@Valid @RequestBody RegistPostsDto regPosts) throws Exception {
 
-		return ResponseEntity.ok()
+		return ResponseEntity.ok() 
 							 .body(postsService.regPostsService(regPosts));
 	}
 	
