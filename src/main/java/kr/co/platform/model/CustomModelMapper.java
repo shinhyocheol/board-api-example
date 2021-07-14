@@ -19,7 +19,7 @@ public class CustomModelMapper {
      * @param <V> Entity 타입의 제네릭 변수
      * @return
      */
-    public <T, V> T toDto(V entity, Class<T> dto) {
+    public <T, V> T toMapping(V entity, Class<T> dto) {
         return dto.cast(modelMapper.map(entity, dto));
     }
 

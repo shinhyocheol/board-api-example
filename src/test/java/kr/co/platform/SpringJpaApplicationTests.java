@@ -31,9 +31,6 @@ class SpringJpaApplicationTests {
 	private MockMvc mockMvc;
 
 	@Autowired
-	private ObjectMapper objectMapper;
-
-	@Autowired
 	private WebApplicationContext context;
 
 	@BeforeAll

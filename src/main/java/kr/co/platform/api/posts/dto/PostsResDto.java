@@ -13,17 +13,23 @@ import kr.co.platform.api.posts.domain.entity.Comment;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor
 public class PostsResDto {
 
     private Long id;
+    
     private String author;
+    
     private String title;
+    
     private String content;
+    
     private LocalDateTime createdDate;
+    
     private LocalDateTime modifiedDate;
+    
     private Long memberId;
+    
     private String memberEmail;
     
     private List<CommentResDto> comments;

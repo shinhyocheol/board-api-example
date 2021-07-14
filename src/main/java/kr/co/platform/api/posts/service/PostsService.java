@@ -45,7 +45,7 @@ public class PostsService {
     	Page<Posts> entityList = postsRepository.findAll(pageble);
 
     	List<PostsResDto> result = entityList.stream()
-                .map(entity -> modelMapper.toDto(entity, PostsResDto.class))
+                .map(entity -> modelMapper.toMapping(entity, PostsResDto.class))
                 .collect(Collectors.toList());
 
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
@@ -56,11 +56,11 @@ public class PostsService {
     	Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
-    	PostsResDto result = modelMapper.toDto(postsEntity, PostsResDto.class);
+    	PostsResDto result = modelMapper.toMapping(postsEntity, PostsResDto.class);
     	
     	List<Comment> commentEntitys = commentRepository.findByPostsId(id);
     	result.setComments(commentEntitys.stream()
-    			.map(commentEntity -> modelMapper.toDto(commentEntity, CommentResDto.class))
+    			.map(commentEntity -> modelMapper.toMapping(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
 
     	return result;
