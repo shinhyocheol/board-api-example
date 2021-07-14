@@ -34,7 +34,8 @@ import lombok.ToString;
 @Table(name = "posts_comment")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class Comment {
+@ToString
+public class PostsComment {
 	
 	@Id
 	@GeneratedValue
@@ -69,7 +70,7 @@ public class Comment {
     private Members member;
     
     @Builder
-    public Comment(
+    public PostsComment(
     		Long commentId, String comment,
     		Long groupNo, Long depthNo,
     		String targetNickname) {

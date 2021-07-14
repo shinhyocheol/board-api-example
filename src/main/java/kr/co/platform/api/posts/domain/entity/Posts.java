@@ -59,7 +59,7 @@ public class Posts{
     private Members member;
     
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Comment> comment;
+    private List<PostsComment> comment;
     
     @Builder
     public Posts(Long id, String author, String title, String content, int memberId) {

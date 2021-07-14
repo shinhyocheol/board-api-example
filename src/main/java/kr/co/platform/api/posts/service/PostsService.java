@@ -3,7 +3,7 @@ package kr.co.platform.api.posts.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kr.co.platform.api.posts.domain.entity.Comment;
+import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.CommentResDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
@@ -58,7 +58,10 @@ public class PostsService {
     	
     	PostsResDto result = modelMapper.toMapping(postsEntity, PostsResDto.class);
     	
-    	List<Comment> commentEntitys = commentRepository.findByPostsId(id);
+    	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
+    	commentEntitys.forEach(
+    			System.out::print
+		);
     	result.setComments(commentEntitys.stream()
     			.map(commentEntity -> modelMapper.toMapping(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
