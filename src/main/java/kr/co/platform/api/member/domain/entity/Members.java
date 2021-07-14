@@ -7,8 +7,11 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
+import kr.co.platform.api.posts.domain.entity.Posts;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Entity
@@ -16,7 +19,7 @@ import java.time.LocalDateTime;
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EntityListeners(AuditingEntityListener.class)
-public class Members {
+public class Members{
 
     @Id
     @GeneratedValue
@@ -43,6 +46,9 @@ public class Members {
 
     @LastModifiedDate
     private LocalDateTime modifiedDate;
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Posts> posts;
 
     @Builder
     public Members(Long id, String email, 

@@ -3,7 +3,7 @@ package kr.co.platform.api.posts.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import kr.co.platform.api.posts.domain.entity.PostsComment;
+import kr.co.platform.api.posts.domain.entity.Comment;
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.CommentResDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
@@ -53,19 +53,15 @@ public class PostsService {
     
     public PostsResDto getPostsByIdService(Long id) {
     	
-    	Posts entity = postsRepository.findById(id)
+    	Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
-    	PostsResDto result = modelMapper.toDto(entity, PostsResDto.class);
+    	PostsResDto result = modelMapper.toDto(postsEntity, PostsResDto.class);
     	
-//    	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
-//    	result.setComments(commentEntitys);
-
-    	// log.debug("CommentEntity : {}", commentEntitys);
- 	
-    	// result.setComments(commentEntitys.stream()
-		// 									.map(commentEntity -> modelMapper.toDto(commentEntity, CommentResDto.class))
-    	//    								.collect(Collectors.toList()));
+    	List<Comment> commentEntitys = commentRepository.findByPostsId(id);
+    	result.setComments(commentEntitys.stream()
+    			.map(commentEntity -> modelMapper.toDto(commentEntity, CommentResDto.class))
+    			.collect(Collectors.toList()));
 
     	return result;
     }

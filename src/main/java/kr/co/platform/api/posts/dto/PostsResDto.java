@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import kr.co.platform.api.member.domain.entity.Members;
-import kr.co.platform.api.posts.domain.entity.PostsComment;
+import kr.co.platform.api.posts.domain.entity.Comment;
 
 @Getter
 @Setter
@@ -23,7 +23,8 @@ public class PostsResDto {
     private String content;
     private LocalDateTime createdDate;
     private LocalDateTime modifiedDate;
-    private Members member;
+    private Long memberId;
+    private String memberEmail;
     
-    private List<PostsComment> comments;
+    private List<CommentResDto> comments;
 }

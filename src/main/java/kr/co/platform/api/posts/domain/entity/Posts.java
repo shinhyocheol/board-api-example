@@ -1,7 +1,9 @@
 package kr.co.platform.api.posts.domain.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
@@ -9,7 +11,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -29,7 +32,7 @@ import lombok.NoArgsConstructor;
 @DynamicInsert
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-public class Posts {
+public class Posts{
 
 	@Id
 	@GeneratedValue
@@ -51,11 +54,13 @@ public class Posts {
     @LastModifiedDate
     private LocalDateTime modifiedDate;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Members member;
     
-
+    @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<Comment> comment;
+    
     @Builder
     public Posts(Long id, String author, String title, String content, int memberId) {
         this.id = id;

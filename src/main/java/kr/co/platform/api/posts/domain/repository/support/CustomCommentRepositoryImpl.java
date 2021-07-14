@@ -5,7 +5,7 @@ import com.querydsl.core.types.ExpressionUtils;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPQLQuery;
-import kr.co.platform.api.posts.domain.entity.PostsComment;
+import kr.co.platform.api.posts.domain.entity.Comment;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
@@ -23,7 +23,7 @@ public class CustomCommentRepositoryImpl extends QuerydslRepositorySupport imple
 	private final JPQLQueryFactory queryFactory;
 	
 	public CustomCommentRepositoryImpl(JPQLQueryFactory queryFactory) {
-		super(PostsComment.class);
+		super(Comment.class);
 		this.queryFactory = queryFactory;
 	}
 	

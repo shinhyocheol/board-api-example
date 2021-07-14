@@ -29,6 +29,6 @@ public class CommentResDto {
 	
 	private String memberId;
 	
-	private String memberNickname;
+	private String memberEmail;
 	
 }

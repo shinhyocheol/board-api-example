@@ -22,6 +22,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import kr.co.platform.api.member.domain.entity.Members;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
@@ -33,8 +34,7 @@ import lombok.ToString;
 @Table(name = "posts_comment")
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-@ToString
-public class PostsComment {
+public class Comment {
 	
 	@Id
 	@GeneratedValue
@@ -60,11 +60,26 @@ public class PostsComment {
 	@LastModifiedDate
 	private LocalDateTime modifiedDate;
 	
-    @Column(nullable = false)
-    private Long postsId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "posts_id")
+    private Posts posts;
     
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Members member;
-
+    
+    @Builder
+    public Comment(
+    		Long commentId, String comment,
+    		Long groupNo, Long depthNo,
+    		String targetNickname) {
+    	
+    	this.commentId = commentId;
+    	this.comment = comment;
+    	this.groupNo = groupNo;
+    	this.depthNo = depthNo;
+    	this.targetNickname = targetNickname;
+    	
+    }
+    
 }

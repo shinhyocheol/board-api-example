@@ -1,6 +1,6 @@
 package kr.co.platform.api.posts.domain.repository.support;
 
-import kr.co.platform.api.posts.domain.entity.PostsComment;
+import kr.co.platform.api.posts.domain.entity.Comment;
 
 import java.util.List;
 
