@@ -61,11 +61,11 @@ public class PostsComment {
 	@LastModifiedDate
 	private LocalDateTime modifiedDate;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "posts_id")
     private Posts posts;
     
-    @OneToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     @JoinColumn(name = "member_id")
     private Members member;
     

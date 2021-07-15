@@ -62,7 +62,7 @@ public class Posts{
     private List<PostsComment> comment;
     
     @Builder
-    public Posts(Long id, String author, String title, String content, int memberId) {
+    public Posts(Long id, String author, String title, String content, Long memberId) {
         this.id = id;
         this.author = author;
         this.title = title;

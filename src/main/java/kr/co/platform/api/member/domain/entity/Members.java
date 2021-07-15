@@ -8,6 +8,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import kr.co.platform.api.posts.domain.entity.Posts;
+import kr.co.platform.api.posts.domain.entity.PostsComment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -49,6 +50,9 @@ public class Members{
     
     @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Posts> posts;
+    
+    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PostsComment> postsComment;
 
     @Builder
     public Members(Long id, String email, 

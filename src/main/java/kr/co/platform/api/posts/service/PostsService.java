@@ -59,9 +59,7 @@ public class PostsService {
     	PostsResDto result = modelMapper.toMapping(postsEntity, PostsResDto.class);
     	
     	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
-    	commentEntitys.forEach(
-    			System.out::print
-		);
+    	    	
     	result.setComments(commentEntitys.stream()
     			.map(commentEntity -> modelMapper.toMapping(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
