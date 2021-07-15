@@ -58,6 +58,7 @@ public class Posts{
     @JoinColumn(name = "member_id")
     private Members member;
     
+    // 댓글 Entity 연관관계 설정(One(게시글 Entity) To Many(댓글 Entity)
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PostsComment> comment;
     

@@ -22,49 +22,51 @@ import java.util.List;
 @EntityListeners(AuditingEntityListener.class)
 public class Members{
 
-    @Id
-    @GeneratedValue
-    private Long id;
+	@Id
+	@GeneratedValue
+	private Long id;
 
-    @Column(length = 100, nullable = false)
-    private String email;
+	@Column(length = 100, nullable = false)
+	private String email;
 
-    @Column(length = 200, nullable = false)
-    private String password;
+	@Column(length = 200, nullable = false)
+	private String password;
 
-    @Column(length = 100, nullable = false)
-    private String name;
+	@Column(length = 100, nullable = false)
+	private String name;
 
-    @Column(length = 100, nullable = false)
-    private String mobile;
+	@Column(length = 100, nullable = false)
+	private String mobile;
 
-    @Column(length = 100, nullable = true)
-    private String nickname;
+	@Column(length = 100, nullable = true)
+	private String nickname;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdDate;
+	@CreatedDate
+	@Column(updatable = false)
+	private LocalDateTime createdDate;
 
-    @LastModifiedDate
-    private LocalDateTime modifiedDate;
-    
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Posts> posts;
-    
-    @OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PostsComment> postsComment;
+	@LastModifiedDate
+	private LocalDateTime modifiedDate;
 
-    @Builder
-    public Members(Long id, String email, 
-    		String password, String name, 
-    		String mobile, String nickname) {
-        this.id = id;
-        this.email = email;
-        this.password = password;
-        this.name = name;
-        this.mobile = mobile;
-        this.nickname = nickname;
-    }
+	// 게시글 Entity 연관관계 설정(One(회원 Entity) To Many(게시글 Entity)
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<Posts> posts;
+
+	// 댓글 Entity 연관관계 설정(One(회원 Entity) To Many(댓글 Entity)
+	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	private List<PostsComment> postsComment;
+
+	@Builder
+	public Members(Long id, String email, 
+			String password, String name, 
+			String mobile, String nickname) {
+		this.id = id;
+		this.email = email;
+		this.password = password;
+		this.name = name;
+		this.mobile = mobile;
+		this.nickname = nickname;
+	}
 
 
 }

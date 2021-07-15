@@ -24,7 +24,6 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service("postsService")
 @AllArgsConstructor
-@Slf4j
 public class PostsService {
 	
     private PostsRepository postsRepository;
@@ -58,8 +57,9 @@ public class PostsService {
     	
     	PostsResDto result = modelMapper.toMapping(postsEntity, PostsResDto.class);
     	
+    	// 게시글에 작성된 댓글 데이터 조회
     	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
-    	    	
+    	
     	result.setComments(commentEntitys.stream()
     			.map(commentEntity -> modelMapper.toMapping(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
