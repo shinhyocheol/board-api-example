@@ -33,18 +33,18 @@ public class JwtAuthProvider {
      * @method 설명 : jwt 토큰 발급
      */
     public String createToken(
-            long userPk,
-            String email,
-            String nickname) {
+            long memberId,
+            String memberEmail,
+            String memberNickname) {
     	
     	/**
     	 * 토큰발급을 위한 데이터는 UserDetails에서 담당
     	 * 따라서 UserDetails를 세부 구현한 CustomUserDetails로 회원정보 전달
     	 */
     	CustomUserDetails user = new CustomUserDetails(
-    			userPk, 	// 번호
-    			email,		// 이메일
-    			nickname);	// 닉네임
+    			memberId, 			// 번호
+    			memberEmail,		// 이메일
+    			memberNickname);	// 닉네임
     	
     	// 유효기간설정을 위한 Date 객체 선언
     	Date date = new Date();
@@ -52,9 +52,9 @@ public class JwtAuthProvider {
         final JwtBuilder builder = Jwts.builder()
                 .setHeaderParam("typ", "JWT")
                 .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))
-                .claim("userPk", userPk)
-                .claim("email", email)
-                .claim("nickname", nickname)
+                .claim("id", memberId)
+                .claim("email", memberEmail)
+                .claim("nickname", memberNickname)
                 .claim("roles", user.getAuthorities())
                 .signWith(SignatureAlgorithm.HS256, atSecretKey);
 
@@ -75,11 +75,11 @@ public class JwtAuthProvider {
         // 토큰 기반으로 유저의 정보 파싱
         Claims claims = Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token).getBody();
 
-        long userPk = claims.get("userPk", Integer.class);
+        long id = claims.get("id", Integer.class);
         String email = claims.get("email", String.class);
         String nickname = claims.get("nickname", String.class);
 
-        CustomUserDetails userDetails = new CustomUserDetails(userPk, email, nickname);
+        CustomUserDetails userDetails = new CustomUserDetails(id, email, nickname);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 

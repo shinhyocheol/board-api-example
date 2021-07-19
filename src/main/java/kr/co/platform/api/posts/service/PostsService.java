@@ -33,7 +33,7 @@ public class PostsService {
     private CustomModelMapper modelMapper;
 
     public Long regPostsService(RegistPostsDto regPosts) {
-
+    	
         Long insertId = postsRepository.save(regPosts.toEntity()).getId();
 
         return insertId;

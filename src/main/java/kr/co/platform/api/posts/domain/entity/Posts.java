@@ -1,6 +1,7 @@
 package kr.co.platform.api.posts.domain.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -60,14 +61,15 @@ public class Posts{
     
     // 댓글 Entity 연관관계 설정(One(게시글 Entity) To Many(댓글 Entity)
     @OneToMany(mappedBy = "posts", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<PostsComment> comment;
+    private List<PostsComment> comment = new ArrayList<PostsComment>(); 
     
     @Builder
-    public Posts(Long id, String author, String title, String content, Long memberId) {
+    public Posts(Long id, String author, String title, String content, Members member) {
         this.id = id;
         this.author = author;
         this.title = title;
         this.content = content;
+        this.member = member;
     }
 	
 }

@@ -12,6 +12,7 @@ import kr.co.platform.api.posts.domain.entity.PostsComment;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -50,11 +51,11 @@ public class Members{
 
 	// 게시글 Entity 연관관계 설정(One(회원 Entity) To Many(게시글 Entity)
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Posts> posts;
+	private List<Posts> posts = new ArrayList<Posts>();
 
 	// 댓글 Entity 연관관계 설정(One(회원 Entity) To Many(댓글 Entity)
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PostsComment> postsComment;
+	private List<PostsComment> postsComment = new ArrayList<PostsComment>();
 
 	@Builder
 	public Members(Long id, String email, 

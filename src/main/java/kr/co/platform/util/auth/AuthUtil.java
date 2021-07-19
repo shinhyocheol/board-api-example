@@ -9,7 +9,7 @@ public class AuthUtil {
 
     public static long getId() {
         CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getUserPk();
+        return principal.getId();
     }
 
     public static String getEmail() {

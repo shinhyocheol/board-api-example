@@ -1,5 +1,6 @@
 package kr.co.platform.api.posts.dto;
 
+import kr.co.platform.api.member.domain.entity.Members;
 import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.util.auth.AuthUtil;
 import lombok.*;
@@ -8,7 +9,6 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@ToString
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 @AllArgsConstructor
 public class RegistPostsDto {
@@ -20,12 +20,17 @@ public class RegistPostsDto {
 	private String content;
 
 	public Posts toEntity() {
-		Posts build = Posts.builder()
+		
+		Members memberBuild = Members.builder().id(AuthUtil.getId()).build();
+		
+		Posts postsBuild = Posts.builder()
 				.author(AuthUtil.getNickname())
 				.title(title)
 				.content(content)
+				.member(memberBuild)
 				.build();
-		return build;
+		
+		return postsBuild;
 	}
 
 }

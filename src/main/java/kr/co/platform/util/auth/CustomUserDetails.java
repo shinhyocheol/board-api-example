@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Setter
 public class CustomUserDetails implements UserDetails {
 
-    private long userPk;
+    private long id;
     private String username;
     private String password;
     private String nickname;
@@ -27,11 +27,11 @@ public class CustomUserDetails implements UserDetails {
     private List<String> roles = new ArrayList<>();
 
     public CustomUserDetails(
-            long userPk,
-            String username,
+            long id,
+            String email,
             String nickname) {
-        this.userPk = userPk;
-        this.username = username;
+        this.id = id;
+        this.username = email;
         this.nickname = nickname;
     }
 
