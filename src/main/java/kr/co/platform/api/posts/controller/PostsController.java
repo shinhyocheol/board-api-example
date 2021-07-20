@@ -9,6 +9,7 @@ import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -33,7 +34,9 @@ public class PostsController {
 	@GetMapping(value = {""})
 	public ResponseEntity<PageImpl<PostsResDto>> getPosts(
 			@RequestParam Integer page) {
-		PageRequest pageble = PageRequest.of(page - 1, 10);
+		
+		PageRequest pageble = PageRequest.of(page - 1, 10, Sort.by("id").descending());
+		
 		return ResponseEntity.ok()
 				 			 .body(postsService.getPostsService(pageble));
 	}
