@@ -35,7 +35,7 @@ public class PostsController {
 	public ResponseEntity<PageImpl<PostsResDto>> getPosts(
 			@RequestParam Integer page) {
 		
-		PageRequest pageble = PageRequest.of(page - 1, 10, Sort.by("id").descending());
+		PageRequest pageble = PageRequest.of(page - 1, 6, Sort.by("id").descending());
 		
 		return ResponseEntity.ok()
 				 			 .body(postsService.getPostsService(pageble));
