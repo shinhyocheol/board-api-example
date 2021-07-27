@@ -51,9 +51,9 @@ public class SignController {
 		return ResponseEntity.ok()
 				.header("x-access-token", jwtProvider
 						.createToken(
-								authentication.getId(),
-								authentication.getEmail(),
-								authentication.getNickname()))
+							authentication.getId(),
+							authentication.getEmail(),
+							authentication.getNickname()))
 				.body(authentication);
 	}
 }
