@@ -21,13 +21,16 @@ public class RegistPostsDto {
 
 	public Posts toEntity() {
 		
-		Members memberBuild = Members.builder().id(AuthUtil.getId()).build();
+		Members memberEntity = Members
+				.builder()
+				.id(AuthUtil.getId())
+				.build();
 		
 		Posts postsBuild = Posts.builder()
 				.author(AuthUtil.getNickname())
 				.title(title)
 				.content(content)
-				.member(memberBuild)
+				.member(memberEntity)
 				.build();
 		
 		return postsBuild;

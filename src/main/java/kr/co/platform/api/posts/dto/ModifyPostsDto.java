@@ -1,5 +1,7 @@
 package kr.co.platform.api.posts.dto;
 
+import kr.co.platform.api.member.domain.entity.Members;
+
 import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.util.auth.AuthUtil;
 import lombok.*;
@@ -25,11 +27,18 @@ public class ModifyPostsDto {
     private String content;
 
     public Posts toEntity() {
+    	
+    	Members memberEntity = Members
+    			.builder()
+    			.id(AuthUtil.getId())
+    			.build();
+    	
         Posts build = Posts.builder()
                 .id(id)
                 .author(AuthUtil.getNickname())
                 .title(title)
                 .content(content)
+                .member(memberEntity)
                 .build();
         return build;
     }
