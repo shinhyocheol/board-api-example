@@ -10,9 +10,7 @@ import javax.validation.constraints.NotBlank;
 
 @Setter
 @Getter
-@ToString
-@AllArgsConstructor
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor
 public class JoinDto {
 
     @NotBlank(message = "'email' is a required input value")

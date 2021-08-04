@@ -11,9 +11,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@ToString
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
+@NoArgsConstructor
 public class ModifyPostsDto {
 
 

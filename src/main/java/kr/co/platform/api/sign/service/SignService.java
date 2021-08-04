@@ -16,20 +16,20 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 import java.security.SecureRandom;
 import java.util.Base64;
 
 @Service("signService")
-@Slf4j
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class SignService {
 
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
 
-	private BCryptPasswordEncoder passwordEncoder;
+	private final BCryptPasswordEncoder passwordEncoder;
 	
-	private CustomModelMapper modelMapper;
+	private final CustomModelMapper modelMapper;
 
 	public Boolean joinService(JoinDto joinDto) {
 

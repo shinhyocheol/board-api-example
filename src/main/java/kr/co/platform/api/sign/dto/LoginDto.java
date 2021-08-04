@@ -12,7 +12,6 @@ import lombok.Setter;
 @Setter
 @Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class LoginDto {
 
 	@NotBlank(message = "'email' is a required input value")

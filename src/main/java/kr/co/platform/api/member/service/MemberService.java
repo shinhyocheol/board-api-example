@@ -13,9 +13,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberService {
 	
-	private MemberRepository memberRepository;
+	private final MemberRepository memberRepository;
 	
-	private CustomModelMapper modelMapper;
+	private final CustomModelMapper modelMapper;
 
 	public MemberResultDto getMemberByIdService(Long id) {
 		

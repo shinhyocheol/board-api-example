@@ -9,8 +9,7 @@ import javax.validation.constraints.NotBlank;
 
 @Getter
 @Setter
-@NoArgsConstructor(access = AccessLevel.PRIVATE)
-@AllArgsConstructor
+@NoArgsConstructor
 public class RegistPostsDto {
 
 	@NotBlank(message = "'title' is a required input value")

@@ -54,33 +54,33 @@ class SpringJpaApplicationTests {
 //
 //	}
 //
-//	@Test
-//	void contextLoads_Posts_상세조회() throws Exception {
-//
-//		mockMvc.perform(get("/posts/5"))
-//				.andDo(print())
-//				.andExpect(status().isOk());
-//
-//	}
-//
 	@Test
-	void contextLoads_게시판_글_등록() throws Exception {
+	void contextLoads_Posts_상세조회() throws Exception {
 
-		RegistPostsDto posts = new RegistPostsDto(
-				"게시글과 회원은 연관관계", 
-				"그러므로 땔래야 땔 수 없는 관계이다.");
-
-		String content = objectMapper.writeValueAsString(posts);
-
-		mockMvc.perform(post("/posts")
-				.header("x-access-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4LWFjY2Vzcy10b2tlbiIsImV4cCI6MTYyNjcwNzg4MCwidXNlclBrIjoxNCwiZW1haWwiOiJ6a3premgxQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi7Zqo67CpIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XX0.wPRNcQAMK-dGRddPvnEpuyx11AdEBfBhZvXgMSsCrTY")
-				.content(content)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
+		mockMvc.perform(get("/posts/16"))
 				.andDo(print())
 				.andExpect(status().isOk());
 
 	}
+//
+//	@Test
+//	void contextLoads_게시판_글_등록() throws Exception {
+//
+//		RegistPostsDto posts = new RegistPostsDto(
+//				"게시글과 회원은 연관관계", 
+//				"그러므로 땔래야 땔 수 없는 관계이다.");
+//
+//		String content = objectMapper.writeValueAsString(posts);
+//
+//		mockMvc.perform(post("/posts")
+//				.header("x-access-token", "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ4LWFjY2Vzcy10b2tlbiIsImV4cCI6MTYyNjcwNzg4MCwidXNlclBrIjoxNCwiZW1haWwiOiJ6a3premgxQG5hdmVyLmNvbSIsIm5pY2tuYW1lIjoi7Zqo67CpIiwicm9sZXMiOlt7ImF1dGhvcml0eSI6IlJPTEVfVVNFUiJ9XX0.wPRNcQAMK-dGRddPvnEpuyx11AdEBfBhZvXgMSsCrTY")
+//				.content(content)
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.accept(MediaType.APPLICATION_JSON))
+//				.andDo(print())
+//				.andExpect(status().isOk());
+//
+//	}
 //
 //	@Test
 //	void contextLoads_게시판_글_수정() throws Exception {

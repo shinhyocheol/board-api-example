@@ -1,14 +1,11 @@
 package kr.co.platform.api.posts.controller;
 
-import java.util.List;
-
 
 import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.dto.PostsResDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +14,15 @@ import javax.validation.Valid;
 
 import kr.co.platform.api.posts.service.PostsService;
 import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = {"/posts"}, produces = MediaType.APPLICATION_JSON_VALUE)
-@AllArgsConstructor
 @CrossOrigin(origins = "*")
+@RequiredArgsConstructor
 public class PostsController {
 
-	private PostsService postsService;
+	private final PostsService postsService;
 	
 	/**
 	 * @method 설명 : 게시글 목록조회

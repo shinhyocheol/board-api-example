@@ -20,17 +20,19 @@ import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
 import kr.co.platform.api.posts.domain.repository.PostsRepository;
 import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Service("postsService")
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class PostsService {
 	
-    private PostsRepository postsRepository;
+    private final PostsRepository postsRepository;
     
-    private CommentRepository commentRepository;
+    private final CommentRepository commentRepository;
 
-    private CustomModelMapper modelMapper;
+    private final CustomModelMapper modelMapper;
 
     public Long regPostsService(RegistPostsDto regPosts) {
     	

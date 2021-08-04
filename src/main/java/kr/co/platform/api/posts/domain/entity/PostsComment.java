@@ -32,8 +32,8 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "posts_comment")
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @ToString
 public class PostsComment {
 	
