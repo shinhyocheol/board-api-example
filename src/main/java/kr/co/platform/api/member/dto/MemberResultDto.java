@@ -21,6 +21,8 @@ public class MemberResultDto {
 	
 	private String nickname;
 	
+	private String profile;
+	
 	private LocalDateTime createdDate;
 	
 	private LocalDateTime modifiedDate;

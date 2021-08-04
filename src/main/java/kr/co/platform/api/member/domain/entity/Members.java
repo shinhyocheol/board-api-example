@@ -41,6 +41,9 @@ public class Members{
 
 	@Column(length = 100, nullable = true)
 	private String nickname;
+	
+	@Column(length = 200, nullable = true)
+	private String profile;
 
 	@CreatedDate
 	@Column(updatable = false)
