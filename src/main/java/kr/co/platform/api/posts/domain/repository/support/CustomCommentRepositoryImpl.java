@@ -1,8 +1,5 @@
 package kr.co.platform.api.posts.domain.repository.support;
 
-import com.querydsl.core.types.ExpressionUtils;
-
-import com.querydsl.jpa.JPQLQuery;
 import org.springframework.data.jpa.repository.support.QuerydslRepositorySupport;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +7,6 @@ import com.querydsl.core.types.Projections;
 import com.querydsl.jpa.JPQLQueryFactory;
 
 import kr.co.platform.api.posts.domain.entity.PostsComment;
-import lombok.ToString;
 
 import java.util.List;
 
