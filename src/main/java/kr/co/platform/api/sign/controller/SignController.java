@@ -16,7 +16,6 @@ import lombok.AllArgsConstructor;
 
 @RestController
 @AllArgsConstructor
-@CrossOrigin(originPatterns = "*")
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SignController {
 

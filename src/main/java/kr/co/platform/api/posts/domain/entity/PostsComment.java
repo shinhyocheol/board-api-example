@@ -32,7 +32,7 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "posts_comment")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 @EntityListeners(AuditingEntityListener.class)
 @ToString
 public class PostsComment {
@@ -73,13 +73,17 @@ public class PostsComment {
     public PostsComment(
     		Long commentId, String comment,
     		Long groupNo, Long depthNo,
-    		String targetNickname) {
+    		String targetNickname, Posts posts,
+    		Members member) {
     	
     	this.commentId = commentId;
     	this.comment = comment;
     	this.groupNo = groupNo;
     	this.depthNo = depthNo;
     	this.targetNickname = targetNickname;
+    	
+    	this.posts = posts;
+    	this.member = member;
     	
     }
     

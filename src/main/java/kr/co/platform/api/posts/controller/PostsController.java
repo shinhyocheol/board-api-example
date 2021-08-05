@@ -3,6 +3,7 @@ package kr.co.platform.api.posts.controller;
 
 import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.dto.PostsResDto;
+import kr.co.platform.api.posts.dto.RegistCommentDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -18,7 +19,6 @@ import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping(value = {"/posts"}, produces = MediaType.APPLICATION_JSON_VALUE)
-@CrossOrigin(origins = "*")
 @RequiredArgsConstructor
 public class PostsController {
 
@@ -95,6 +95,14 @@ public class PostsController {
 
 		return ResponseEntity.ok()
 							 .body("DELETE SUCCESS");
+	}
+	
+	@PostMapping(value = {"/{postsId}/comment"})
+	public void regCommentByPosts(
+			@PathVariable Long postsId,
+			@Valid @RequestBody RegistCommentDto regComment) throws Exception {
+		
+		postsService.regCommentByPostsService(regComment);
 	}
 	
 }

@@ -3,8 +3,11 @@ package kr.co.platform.api.posts.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.validation.Valid;
+
 import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.dto.PostsResDto;
+import kr.co.platform.api.posts.dto.RegistCommentDto;
 import kr.co.platform.api.posts.dto.CommentResDto;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import kr.co.platform.model.CustomModelMapper;
@@ -79,6 +82,11 @@ public class PostsService {
 
         postsRepository.deleteById(id);
 
+	}
+
+	public void regCommentByPostsService(RegistCommentDto regComment) {
+		
+		commentRepository.save(regComment.toEntity());
 	}
 
 }

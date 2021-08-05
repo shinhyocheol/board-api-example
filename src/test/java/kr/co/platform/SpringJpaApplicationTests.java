@@ -4,6 +4,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.platform.api.posts.dto.RegistPostsDto;
 import lombok.RequiredArgsConstructor;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
+import kr.co.platform.api.posts.dto.RegistCommentDto;
+
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -54,14 +56,15 @@ class SpringJpaApplicationTests {
 //
 //	}
 //
-	@Test
-	void contextLoads_Posts_상세조회() throws Exception {
-
-		mockMvc.perform(get("/posts/16"))
-				.andDo(print())
-				.andExpect(status().isOk());
-
-	}
+//	
+//	@Test
+//	void contextLoads_Posts_상세조회() throws Exception {
+//
+//		mockMvc.perform(get("/posts/16"))
+//				.andDo(print())
+//				.andExpect(status().isOk());
+//
+//	}
 //
 //	@Test
 //	void contextLoads_게시판_글_등록() throws Exception {
@@ -103,5 +106,27 @@ class SpringJpaApplicationTests {
 //				.andExpect(status().isOk());
 //
 //	}
+	
+	@Test
+	void contextLoads_댓글_등록테스트() throws Exception {
+		
+		RegistCommentDto comment = new RegistCommentDto();
+		comment.setComment("대댓글 등");
+		
+		comment.setGroupNo((long)0);
+		comment.setDepthNo((long)1);
+		comment.setPostsId((long)19);
+		
+		String content = objectMapper.writeValueAsString(comment);
+		
+		mockMvc.perform(post("/posts/19/comment")
+				.content(content)
+				.contentType(MediaType.APPLICATION_JSON)
+				.accept(MediaType.APPLICATION_JSON))
+				.andDo(print())
+				.andExpect(status().isOk());
+	}
 
+	
+	
 }
