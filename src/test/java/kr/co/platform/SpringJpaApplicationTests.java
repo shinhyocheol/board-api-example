@@ -111,7 +111,7 @@ class SpringJpaApplicationTests {
 	void contextLoads_댓글_등록테스트() throws Exception {
 		
 		RegistCommentDto comment = new RegistCommentDto();
-		comment.setComment("대댓글 등");
+		comment.setComment("대댓글 등록22222222");
 		
 		comment.setGroupNo((long)0);
 		comment.setDepthNo((long)1);
