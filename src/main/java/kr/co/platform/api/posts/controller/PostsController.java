@@ -97,6 +97,12 @@ public class PostsController {
 							 .body("DELETE SUCCESS");
 	}
 	
+	/**
+	 * @method 설명 : 게시글 댓글 등록
+	 * @param postsId
+	 * @param regComment
+	 * @throws Exception
+	 */
 	@PostMapping(value = {"/{postsId}/comment"})
 	public void regCommentByPosts(
 			@PathVariable Long postsId,
