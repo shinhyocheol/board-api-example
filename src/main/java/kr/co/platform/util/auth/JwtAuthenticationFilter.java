@@ -36,11 +36,10 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
                 httpRes.setStatus(HttpServletResponse.SC_OK);
             } else {
 
+            	/** 사용자 인증토큰 검사 */
                 String token = jwtTokenProvider.resolveToken(httpReq);
                 if (token != null) {
                     if(jwtTokenProvider.validateToken(token)) {
-
-                        /** 사용자 인증토큰 검사 */
                         Authentication auth = jwtTokenProvider.getAuthentication(token);
                         SecurityContextHolder.getContext().setAuthentication(auth);
                     }

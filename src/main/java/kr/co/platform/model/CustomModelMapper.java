@@ -9,7 +9,7 @@ public class CustomModelMapper {
     private ModelMapper modelMapper;
 
     public CustomModelMapper(ModelMapper modelMapper) {
-
+    	modelMapper.getConfiguration().setSkipNullEnabled(true);
         this.modelMapper = modelMapper;
     }
 
