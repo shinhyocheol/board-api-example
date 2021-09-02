@@ -19,7 +19,7 @@ import java.util.List;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Members{
 

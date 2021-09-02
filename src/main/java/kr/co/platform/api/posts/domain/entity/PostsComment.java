@@ -32,7 +32,7 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "posts_comment")
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 @ToString
 public class PostsComment {
