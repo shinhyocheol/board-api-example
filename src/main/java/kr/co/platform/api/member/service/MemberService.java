@@ -17,7 +17,7 @@ public class MemberService {
 	
 	private final CustomModelMapper modelMapper;
 
-	public MemberResultDto getMemberByIdService(Long id) {
+	public MemberResultDto getMemberById(Long id) {
 		
 		Members entity = memberRepository.findById(id)
 				.orElseThrow(() -> new ApiOtherException("Member Not Found"));

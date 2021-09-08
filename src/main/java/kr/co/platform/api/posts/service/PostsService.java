@@ -22,10 +22,7 @@ import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
 import kr.co.platform.api.posts.domain.repository.PostsRepository;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service("postsService")
 @RequiredArgsConstructor
@@ -37,14 +34,14 @@ public class PostsService {
 
     private final CustomModelMapper modelMapper;
 
-    public Long regPostsService(RegistPostsDto regPosts) {
+    public Long regPosts(RegistPostsDto regPosts) {
     	
         Long insertId = postsRepository.save(regPosts.toEntity()).getId();
 
         return insertId;
     }
     
-    public PageImpl<PostsResDto> getPostsService(PageRequest pageble) {
+    public PageImpl<PostsResDto> getPosts(PageRequest pageble) {
 
     	Page<Posts> entityList = postsRepository.findAll(pageble);
 
@@ -55,7 +52,7 @@ public class PostsService {
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
     }
     
-    public PostsResDto getPostsByIdService(Long id) {
+    public PostsResDto getPostsById(Long id) {
     	
     	Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
@@ -72,19 +69,19 @@ public class PostsService {
     	return result;
     }
 
-    public void setPostsService(ModifyPostsDto setPosts) {
+    public void setPosts(ModifyPostsDto setPosts) {
 
         postsRepository.save(setPosts.toEntity());
 
     }
 
-	public void delPostsService(Long id) {
+	public void delPosts(Long id) {
 
         postsRepository.deleteById(id);
 
 	}
 
-	public void regCommentByPostsService(RegistCommentDto regComment) {
+	public void regCommentByPosts(RegistCommentDto regComment) {
 		
 		commentRepository.save(regComment.toEntity());
 	}

@@ -33,7 +33,7 @@ public class SignController {
 			@Valid @RequestBody JoinDto joinDto) throws Exception {
 
 		return ResponseEntity.ok()
-				.body(apiSignService.joinService(joinDto));
+				.body(apiSignService.regMember(joinDto));
 	}
 	
 	/**
@@ -45,7 +45,7 @@ public class SignController {
 	public ResponseEntity<AuthenticationDto> appLogin(
 			@Valid @RequestBody LoginDto loginDto) throws Exception {
 
-		AuthenticationDto authentication = apiSignService.loginService(loginDto);
+		AuthenticationDto authentication = apiSignService.loginMember(loginDto);
 
 		return ResponseEntity.ok()
 				.header("x-access-token", jwtProvider

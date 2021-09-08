@@ -36,7 +36,7 @@ public class PostsController {
 		PageRequest pageble = PageRequest.of(page - 1, 8, Sort.by("id").descending());
 		
 		return ResponseEntity.ok()
-				 			 .body(postsService.getPostsService(pageble));
+				 			 .body(postsService.getPosts(pageble));
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class PostsController {
 			@Valid @RequestBody RegistPostsDto regPosts) throws Exception {
 
 		return ResponseEntity.ok() 
-							 .body(postsService.regPostsService(regPosts));
+							 .body(postsService.regPosts(regPosts));
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class PostsController {
 			@PathVariable Long id) {
 
 		return ResponseEntity.ok()
-							 .body(postsService.getPostsByIdService(id));
+							 .body(postsService.getPostsById(id));
 	}
 	
 	/**
@@ -76,7 +76,7 @@ public class PostsController {
 			@PathVariable Long id,
 			@Valid @RequestBody ModifyPostsDto setPosts) throws Exception {
 
-		postsService.setPostsService(setPosts);
+		postsService.setPosts(setPosts);
 
 		return ResponseEntity.ok()
 							 .body("UPDATE SUCCESS");
@@ -91,7 +91,7 @@ public class PostsController {
 	public ResponseEntity<String> delPosts(
 			@PathVariable Long id) throws Exception {
 
-		postsService.delPostsService(id);
+		postsService.delPosts(id);
 
 		return ResponseEntity.ok()
 							 .body("DELETE SUCCESS");
@@ -108,7 +108,7 @@ public class PostsController {
 			@PathVariable Long postsId,
 			@Valid @RequestBody RegistCommentDto regComment) throws Exception {
 		
-		postsService.regCommentByPostsService(regComment);
+		postsService.regCommentByPosts(regComment);
 	}
 	
 }

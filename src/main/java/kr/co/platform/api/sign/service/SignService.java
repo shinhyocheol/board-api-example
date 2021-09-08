@@ -31,7 +31,7 @@ public class SignService {
 	
 	private final CustomModelMapper modelMapper;
 
-	public Boolean joinService(JoinDto joinDto) {
+	public Boolean regMember(JoinDto joinDto) {
 
 		// 아이디 중복체크
 		if (!Empty.validation(memberRepository.countByEmail(joinDto.getEmail())))
@@ -50,7 +50,7 @@ public class SignService {
 		return true;
 	}
 
-	public AuthenticationDto loginService(LoginDto loginDto) {
+	public AuthenticationDto loginMember(LoginDto loginDto) {
 		
 		// dto -> entity
 		Members loginEntity = loginDto.toEntity();

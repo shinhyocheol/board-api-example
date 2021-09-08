@@ -28,7 +28,7 @@ public class MemberController {
 			@PathVariable Long id) throws Exception {
 		
 		return ResponseEntity.ok()
-							.body(memberService.getMemberByIdService(id));
+							.body(memberService.getMemberById(id));
 	}
 	
 }
