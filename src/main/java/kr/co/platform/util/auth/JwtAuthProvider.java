@@ -18,12 +18,12 @@ import java.util.List;
 @Component
 public class JwtAuthProvider {
 
-    @Value("${spring.jwt.secret.at}")
-    private String atSecretKey;
+    @Value("${spring.jwt.secret.signature}")
+    private String signatureKey;
 
     @PostConstruct
     protected void init() {
-        atSecretKey = Base64.getEncoder().encodeToString(atSecretKey.getBytes());
+        signatureKey = Base64.getEncoder().encodeToString(signatureKey.getBytes());
     }
 
     private final UserDetailsService userDetailsService;
@@ -33,37 +33,37 @@ public class JwtAuthProvider {
      * @method 설명 : jwt 토큰 발급
      */
     public String createToken(
-            long memberId,
-            String memberEmail,
-            String memberNickname) {
+            Long id,
+            String username,
+            String nickname) {
     	
     	/**
     	 * 토큰발급을 위한 데이터는 UserDetails에서 담당
     	 * 따라서 UserDetails를 세부 구현한 CustomUserDetails로 회원정보 전달
     	 */
     	CustomUserDetails user = new CustomUserDetails(
-    			memberId, 			// 번호
-    			memberEmail,		// 이메일
-    			memberNickname);	// 닉네임
+                id, 			// 번호
+                username,		// 이메일
+                nickname);	    // 닉네임
     	
     	// 유효기간설정을 위한 Date 객체 선언
     	Date date = new Date();
         
         final JwtBuilder builder = Jwts.builder()
-                .setHeaderParam("typ", "JWT")
-                .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))
-                .claim("id", memberId)
-                .claim("email", memberEmail)
-                .claim("nickname", memberNickname)
+                .setHeaderParam("typ", "JWT")                                                   // 토큰 타입
+                .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))    // 토큰 유효시간 설정
+                .claim("id", id)
+                .claim("email", username)
+                .claim("nickname", nickname)
                 .claim("roles", user.getAuthorities())
-                .signWith(SignatureAlgorithm.HS256, atSecretKey);
+                .signWith(SignatureAlgorithm.HS256, signatureKey);                                           // 토큰 시그니쳐 설정
 
         return builder.compact();
     }
 
     // 토큰에서 회원 정보 추출
     public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token).getBody().getSubject();
+        return Jwts.parser().setSigningKey(signatureKey).parseClaimsJws(token).getBody().getSubject();
     }
 
     /**
@@ -73,9 +73,9 @@ public class JwtAuthProvider {
     public Authentication getAuthentication(String token) {
 
         // 토큰 기반으로 유저의 정보 파싱
-        Claims claims = Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token).getBody();
+        Claims claims = Jwts.parser().setSigningKey(signatureKey).parseClaimsJws(token).getBody();
 
-        long id = claims.get("id", Integer.class);
+        Long id = claims.get("id", Long.class);
         String email = claims.get("email", String.class);
         String nickname = claims.get("nickname", String.class);
 
@@ -95,7 +95,7 @@ public class JwtAuthProvider {
      */
     public boolean validateToken(String token) {
         try {
-            Jws<Claims> claims = Jwts.parser().setSigningKey(atSecretKey).parseClaimsJws(token);
+            Jws<Claims> claims = Jwts.parser().setSigningKey(signatureKey).parseClaimsJws(token);
             return !claims.getBody().getExpiration().before(new Date());
         } catch (Exception e) {
             return false;

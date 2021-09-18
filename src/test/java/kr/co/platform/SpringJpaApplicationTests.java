@@ -2,7 +2,6 @@ package kr.co.platform;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import kr.co.platform.api.posts.dto.RegistPostsDto;
-import lombok.RequiredArgsConstructor;
 import kr.co.platform.api.posts.dto.ModifyPostsDto;
 import kr.co.platform.api.posts.dto.RegistCommentDto;
 
