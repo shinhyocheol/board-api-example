@@ -8,28 +8,26 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
+
 @Getter
 @Setter
 @NoArgsConstructor
 public class RegistCommentDto {
-	
+
+	@NotBlank(message = "등록할 댓글이 존재하지 않습니다.")
 	private String comment;
-	
-	private Long groupNo;
-	
-	private Long depthNo;
-	
+
 	private Long postsId;
 	
 	public PostsComment toEntity() {
 		
 		Posts posts = Posts.builder().id(postsId).build();
-		Members member = Members.builder().id((long)14).build();
+		Members member = Members.builder().id(AuthUtil.getId()).build();
 		
 		PostsComment build = PostsComment.builder()
 				.comment(comment)
-				.groupNo(groupNo)
-				.depthNo(depthNo)
+				.depthNo((long) 0)
 				.posts(posts)
 				.member(member)
 				.build();

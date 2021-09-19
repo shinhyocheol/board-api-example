@@ -75,7 +75,7 @@ public class JwtAuthProvider {
         // 토큰 기반으로 유저의 정보 파싱
         Claims claims = Jwts.parser().setSigningKey(signatureKey).parseClaimsJws(token).getBody();
 
-        Long id = claims.get("id", Long.class);
+        long id = claims.get("id", Integer.class);
         String email = claims.get("email", String.class);
         String nickname = claims.get("nickname", String.class);
 

@@ -19,12 +19,12 @@ import java.util.List;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EntityListeners(AuditingEntityListener.class)
 public class Members{
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
 	@Column(length = 100, nullable = false)
@@ -44,6 +44,9 @@ public class Members{
 	
 	@Column(length = 200, nullable = true)
 	private String profile;
+
+	@Column(length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
+	private String isDeleted;
 
 	@CreatedDate
 	@Column(updatable = false)

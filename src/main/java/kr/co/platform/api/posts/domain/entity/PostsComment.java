@@ -2,17 +2,7 @@ package kr.co.platform.api.posts.domain.entity;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
@@ -32,13 +22,13 @@ import lombok.ToString;
 @Getter
 @Entity
 @Table(name = "posts_comment")
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @EntityListeners(AuditingEntityListener.class)
 @ToString
 public class PostsComment {
 	
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	private Long commentId;
 	
@@ -53,6 +43,9 @@ public class PostsComment {
 	
 	@Column(length = 50, nullable = true)
 	private String targetNickname;
+
+	@Column(length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
+	private String isDeleted;
 	
 	@CreatedDate
 	@Column(updatable = false)
@@ -84,7 +77,10 @@ public class PostsComment {
     	
     	this.posts = posts;
     	this.member = member;
-    	
     }
+
+    public void saveCommentGroupNo(Long groupNo) {
+    	this.groupNo = groupNo;
+	}
     
 }

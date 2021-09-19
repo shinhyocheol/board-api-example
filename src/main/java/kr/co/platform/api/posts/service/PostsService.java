@@ -6,10 +6,7 @@ import java.util.stream.Collectors;
 import javax.validation.Valid;
 
 import kr.co.platform.api.posts.domain.entity.PostsComment;
-import kr.co.platform.api.posts.dto.PostsResDto;
-import kr.co.platform.api.posts.dto.RegistCommentDto;
-import kr.co.platform.api.posts.dto.CommentResDto;
-import kr.co.platform.api.posts.dto.ModifyPostsDto;
+import kr.co.platform.api.posts.dto.*;
 import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.util.advice.exception.ApiOtherException;
 
@@ -18,11 +15,11 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import kr.co.platform.api.posts.dto.RegistPostsDto;
 import kr.co.platform.api.posts.domain.entity.Posts;
 import kr.co.platform.api.posts.domain.repository.CommentRepository;
 import kr.co.platform.api.posts.domain.repository.PostsRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service("postsService")
 @RequiredArgsConstructor
@@ -81,9 +78,18 @@ public class PostsService {
 
 	}
 
+	@Transactional
 	public void regCommentByPosts(RegistCommentDto regComment) {
-		
-		commentRepository.save(regComment.toEntity());
+		// 댓글 등록
+        PostsComment comment = commentRepository.save(regComment.toEntity());
+
+        // 등록한 댓글의 ID를 해당 댓글의 그룹번호로 지정
+        comment.saveCommentGroupNo(comment.getCommentId());
 	}
 
+    public void regReplyByComment(RegistReplyDto regReply) {
+        // 대댓글 등록
+        commentRepository.save(regReply.toEntity());
+
+    }
 }

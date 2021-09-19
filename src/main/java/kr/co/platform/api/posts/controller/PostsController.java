@@ -1,10 +1,7 @@
 package kr.co.platform.api.posts.controller;
 
 
-import kr.co.platform.api.posts.dto.RegistPostsDto;
-import kr.co.platform.api.posts.dto.PostsResDto;
-import kr.co.platform.api.posts.dto.RegistCommentDto;
-import kr.co.platform.api.posts.dto.ModifyPostsDto;
+import kr.co.platform.api.posts.dto.*;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -31,12 +28,10 @@ public class PostsController {
 	 */
 	@GetMapping(value = {""})
 	public ResponseEntity<PageImpl<PostsResDto>> getPosts(
-			@RequestParam Integer page) {
-		
-		PageRequest pageble = PageRequest.of(page - 1, 8, Sort.by("id").descending());
-		
+			@RequestParam("page") Integer page) {
+
 		return ResponseEntity.ok()
-				 			 .body(postsService.getPosts(pageble));
+				 			 .body(postsService.getPosts(PageRequest.of(page - 1, 8, Sort.by("id").descending())));
 	}
 
 	/**
@@ -107,8 +102,15 @@ public class PostsController {
 	public void regCommentByPosts(
 			@PathVariable Long postsId,
 			@Valid @RequestBody RegistCommentDto regComment) throws Exception {
-		
+
 		postsService.regCommentByPosts(regComment);
+	}
+
+	@PostMapping(value = {"/{postId}/comment/{commentId}"})
+	public void regReplyByComment(
+			@PathVariable Long commentId,
+			@Valid @RequestBody RegistReplyDto regReply) {
+		postsService.regReplyByComment(regReply);
 	}
 	
 }
