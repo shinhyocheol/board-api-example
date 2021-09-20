@@ -2,10 +2,10 @@
 
 - Java, javascript, html, css, MySQL
 - SpringBoot, Vue3, bootstrap4
-- JPA(Hibernate)
+- JPA(Hibernate), gradle
 - QueryDsl, JUnit4, Docker, github, sorucetree
 
-## build.gradle (자세한 코드는 직접 확인해주시기 바랍니다.)
+# build.gradle (자세한 코드는 직접 확인해주시기 바랍니다.)
 
 ```bash
 plugins {
