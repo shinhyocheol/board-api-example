@@ -5,3 +5,87 @@
 - JPA(Hibernate)
 - QueryDsl, JUnit4, Docker, github, sorucetree
 
+## build.gradle (자세한 코드는 직접 확인해주시기 바랍니다.)
+
+```bash
+plugins {
+	id 'org.springframework.boot' version '2.4.1'
+	id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+	id 'java'
+}
+
+group = 'kr.co'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	compile 'net.sf.json-lib:json-lib:2.4:jdk15'
+
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.11.3'
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.1.1'
+	compile group: 'io.jsonwebtoken', name: 'jjwt', version: '0.7.0'
+
+	implementation 'javax.annotation:javax.annotation-api:1.3.2'
+	
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
+	implementation 'org.springframework.boot:spring-boot-starter-security'
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'org.springframework.boot:spring-boot-starter-undertow'
+	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation('org.springframework.boot:spring-boot-starter-web') {
+        exclude group: "org.springframework.boot", module: "spring-boot-starter-tomcat"
+    }
+
+	// querydsl
+	implementation group: 'com.querydsl', name: 'querydsl-jpa'
+	implementation group: 'com.querydsl', name: 'querydsl-apt'
+	annotationProcessor "com.querydsl:querydsl-apt:${dependencyManagement.importedProperties['querydsl.version']}:jpa"
+	annotationProcessor "jakarta.persistence:jakarta.persistence-api"
+	annotationProcessor "jakarta.annotation:jakarta.annotation-api"
+
+	// lombok
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	runtimeOnly 'mysql:mysql-connector-java'
+	runtimeOnly 'org.webjars:bootstrap:4.5.0'
+
+	// test 환경
+	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+		exclude group: "com.vaadin.external.google", module:"android-json"
+	}
+	testImplementation group: 'org.hamcrest', name: 'hamcrest-library', version: '1.3'
+	testImplementation 'org.springframework.security:spring-security-test'
+	
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+}
+
+// querydsl 적용
+def generated='src/main/generated'
+sourceSets {
+	main.java.srcDirs += [ generated ]
+}
+tasks.withType(JavaCompile) {
+	options.annotationProcessorGeneratedSourcesDirectory = file(generated)
+}
+clean.doLast {
+	file(generated).deleteDir()
+}
+
+test {
+	useJUnitPlatform()
+}
+```
