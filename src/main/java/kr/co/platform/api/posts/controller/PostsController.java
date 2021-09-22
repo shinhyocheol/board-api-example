@@ -41,7 +41,7 @@ public class PostsController {
 	 */
 	@PostMapping(value = {""})
 	public ResponseEntity<Long> regPosts(
-			@Valid @RequestBody RegistPostsDto regPosts) throws Exception {
+			@Valid @RequestBody RegistPostsDto regPosts) {
 
 		return ResponseEntity.ok() 
 							 .body(postsService.regPosts(regPosts));
@@ -64,12 +64,11 @@ public class PostsController {
 	 * @method 설명 : 게시글 수정
 	 * @param id
 	 * @param setPosts
-	 * @throws Exception
 	 */
 	@PutMapping(value = {"/{id}"})
 	public ResponseEntity<String> setPosts(
 			@PathVariable Long id,
-			@Valid @RequestBody ModifyPostsDto setPosts) throws Exception {
+			@Valid @RequestBody ModifyPostsDto setPosts) {
 
 		postsService.setPosts(setPosts);
 
@@ -80,11 +79,10 @@ public class PostsController {
 	/**
 	 * @method 설명 : 게시글 삭제
 	 * @param id
-	 * @throws Exception
 	 */
 	@DeleteMapping(value = {"/{id}"})
 	public ResponseEntity<String> delPosts(
-			@PathVariable Long id) throws Exception {
+			@PathVariable Long id) {
 
 		postsService.delPosts(id);
 
@@ -101,11 +99,16 @@ public class PostsController {
 	@PostMapping(value = {"/{postsId}/comment"})
 	public void regCommentByPosts(
 			@PathVariable Long postsId,
-			@Valid @RequestBody RegistCommentDto regComment) throws Exception {
+			@Valid @RequestBody RegistCommentDto regComment) {
 
 		postsService.regCommentByPosts(regComment);
 	}
 
+	/**
+	 * @method 설명 : 댓글의 답글 등록
+	 * @param commentId
+	 * @param regReply
+	 */
 	@PostMapping(value = {"/{postId}/comment/{commentId}"})
 	public void regReplyByComment(
 			@PathVariable Long commentId,

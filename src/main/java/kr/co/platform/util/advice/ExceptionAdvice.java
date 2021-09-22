@@ -1,5 +1,6 @@
 package kr.co.platform.util.advice;
 
+import javassist.NotFoundException;
 import kr.co.platform.util.advice.exception.*;
 
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.access.AccessDeniedException;
 
+import javax.persistence.Access;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.sql.SQLException;
@@ -25,10 +27,7 @@ import java.util.Map;
 @RestControllerAdvice
 public class ExceptionAdvice {
 
-    @ExceptionHandler({
-            Exception.class,
-            SQLException.class,
-            IllegalAccessException.class})
+    @ExceptionHandler({Exception.class})
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResponseEntity<String> defaultException(Exception e) throws Exception {
         e.printStackTrace();
@@ -42,8 +41,24 @@ public class ExceptionAdvice {
     }
 
     @ExceptionHandler({
+            HttpMessageNotReadableException.class,
+            MethodArgumentNotValidException.class,
+            MissingServletRequestParameterException.class,
+            UnsatisfiedServletRequestParameterException.class})
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<String> badRequestException(Exception e) throws Exception {
+        e.printStackTrace();
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("msg", e.getMessage());
+
+        JSONArray result = JSONArray.fromObject(resultMap);
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result.get(0).toString());
+    }
+
+    @ExceptionHandler({
             UserNotFoundException.class,
-            AccessDeniedException.class,
             AuthenticationEntryPointException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<String> accessDeniedException(Exception e) throws Exception {
@@ -57,27 +72,7 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(result.get(0).toString());
     }
 
-    @ExceptionHandler({
-            HttpMessageNotReadableException.class,
-            MethodArgumentNotValidException.class,
-            MissingServletRequestParameterException.class,
-            UnsatisfiedServletRequestParameterException.class})
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public ResponseEntity<String> badRequestException(
-            HttpServletRequest request,
-            HttpServletResponse response,
-            Exception e) throws Exception {
-        e.printStackTrace();
-
-        Map<String, Object> resultMap = new HashMap<String, Object>();
-        resultMap.put("msg", e.getMessage());
-
-        JSONArray result = JSONArray.fromObject(resultMap);
-
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result.get(0).toString());
-    }
-
-    @ExceptionHandler(ForbiddenException.class)
+    @ExceptionHandler({ForbiddenException.class, AccessDeniedException.class})
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public ResponseEntity<String> forbiddenException(ForbiddenException e) throws Exception {
         e.printStackTrace();
@@ -89,6 +84,17 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(result.get(0).toString());
     }
 
+    @ExceptionHandler({NotFoundException.class, UserNotFoundException.class})
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<String> forbiddenException(NotFoundException e) throws Exception {
+        e.printStackTrace();
+
+        Map<String, Object> resultMap = new HashMap<String, Object>();
+        resultMap.put("msg", e.getMessage());
+
+        JSONArray result = JSONArray.fromObject(resultMap);
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(result.get(0).toString());
+    }
 
     @ExceptionHandler(DuplicatedException.class)
     @ResponseStatus(HttpStatus.CONFLICT)

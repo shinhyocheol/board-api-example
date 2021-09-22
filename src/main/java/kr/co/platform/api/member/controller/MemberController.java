@@ -25,7 +25,7 @@ public class MemberController {
 	 */
 	@GetMapping(value = {"/{id}"})
 	public ResponseEntity<MemberResultDto> getMember(
-			@PathVariable Long id) throws Exception {
+			@PathVariable Long id) {
 		
 		return ResponseEntity.ok()
 							.body(memberService.getMemberById(id));
