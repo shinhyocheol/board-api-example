@@ -1,4 +1,4 @@
-package kr.co.platform.util.advice.exception;
+package kr.co.platform.exception.custom;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

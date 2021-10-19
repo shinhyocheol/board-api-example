@@ -16,7 +16,7 @@ import java.util.List;
 
 @RequiredArgsConstructor
 @Component
-public class JwtAuthProvider {
+public class AuthProvider {
 
     @Value("${spring.jwt.secret.signature}")
     private String signatureKey;

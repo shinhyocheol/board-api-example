@@ -6,8 +6,7 @@ import kr.co.platform.api.sign.dto.AuthenticationDto;
 import kr.co.platform.api.sign.dto.JoinDto;
 import kr.co.platform.api.sign.dto.LoginDto;
 import kr.co.platform.api.sign.service.SignService;
-import kr.co.platform.util.auth.CustomUserDetails;
-import kr.co.platform.util.auth.JwtAuthProvider;
+import kr.co.platform.util.auth.AuthProvider;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +20,7 @@ public class SignController {
 
 	private SignService apiSignService;
 	
-	private JwtAuthProvider jwtProvider;
+	private AuthProvider jwtProvider;
 
 	/**
 	 * @method 설명 : 회원가입

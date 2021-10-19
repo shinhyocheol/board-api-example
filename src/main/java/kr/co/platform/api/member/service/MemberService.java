@@ -6,7 +6,7 @@ import kr.co.platform.api.member.domain.entity.Members;
 import kr.co.platform.api.member.domain.repository.MemberRepository;
 import kr.co.platform.api.member.dto.MemberResultDto;
 import kr.co.platform.model.CustomModelMapper;
-import kr.co.platform.util.advice.exception.ApiOtherException;
+import kr.co.platform.exception.custom.ApiOtherException;
 import lombok.RequiredArgsConstructor;
 
 @Service("memberService")

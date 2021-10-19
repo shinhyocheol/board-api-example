@@ -1,5 +1,6 @@
-package kr.co.platform.util.auth;
+package kr.co.platform.util.filter;
 
+import kr.co.platform.util.auth.AuthProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,11 +15,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @RequiredArgsConstructor
-public class JwtAuthenticationFilter extends GenericFilterBean {
+public class CustomFilter extends GenericFilterBean {
 
-    private JwtAuthProvider jwtTokenProvider;
+    private AuthProvider jwtTokenProvider;
 
-    public JwtAuthenticationFilter(JwtAuthProvider jwtTokenProvider) {
+    public CustomFilter(AuthProvider jwtTokenProvider) {
         this.jwtTokenProvider = jwtTokenProvider;
     }
 

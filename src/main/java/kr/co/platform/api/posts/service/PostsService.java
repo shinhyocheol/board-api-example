@@ -3,12 +3,10 @@ package kr.co.platform.api.posts.service;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.validation.Valid;
-
 import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.dto.*;
 import kr.co.platform.model.CustomModelMapper;
-import kr.co.platform.util.advice.exception.ApiOtherException;
+import kr.co.platform.exception.custom.ApiOtherException;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;

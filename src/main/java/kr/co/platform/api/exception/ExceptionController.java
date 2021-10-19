@@ -6,7 +6,7 @@ import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import kr.co.platform.util.advice.exception.AuthenticationEntryPointException;
+import kr.co.platform.exception.custom.AuthenticationEntryPointException;
 
 @RestController
 @RequestMapping(value = "/exception")

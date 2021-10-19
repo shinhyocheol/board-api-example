@@ -1,7 +1,7 @@
-package kr.co.platform.util.empty;
+package kr.co.platform.util.validation;
 
-import kr.co.platform.util.advice.exception.ApiOtherException;
-import kr.co.platform.util.advice.exception.UserNotFoundException;
+import kr.co.platform.exception.custom.ApiOtherException;
+import kr.co.platform.exception.custom.UserNotFoundException;
 
 import java.util.List;
 import java.util.Map;

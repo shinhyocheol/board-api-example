@@ -2,7 +2,7 @@ package kr.co.platform.util.auth;
 
 import kr.co.platform.api.member.domain.entity.Members;
 import kr.co.platform.api.member.domain.repository.MemberRepository;
-import kr.co.platform.util.advice.exception.UserNotFoundException;
+import kr.co.platform.exception.custom.UserNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

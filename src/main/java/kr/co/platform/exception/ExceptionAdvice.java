@@ -1,8 +1,8 @@
-package kr.co.platform.util.advice;
+package kr.co.platform.exception;
 
 import javassist.NotFoundException;
-import kr.co.platform.util.advice.exception.*;
 
+import kr.co.platform.exception.custom.*;
 import lombok.RequiredArgsConstructor;
 import net.sf.json.JSONArray;
 import org.springframework.http.HttpStatus;
@@ -16,10 +16,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.access.AccessDeniedException;
 
-import javax.persistence.Access;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package kr.co.platform.util.auth;
+package kr.co.platform.util.auth.point;
 
 import lombok.extern.slf4j.Slf4j;
 

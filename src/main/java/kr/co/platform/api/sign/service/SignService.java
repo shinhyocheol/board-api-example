@@ -7,19 +7,14 @@ import kr.co.platform.api.sign.dto.AuthenticationDto;
 import kr.co.platform.api.sign.dto.JoinDto;
 import kr.co.platform.api.sign.dto.LoginDto;
 import kr.co.platform.model.CustomModelMapper;
-import kr.co.platform.util.advice.exception.DuplicatedException;
-import kr.co.platform.util.advice.exception.ForbiddenException;
-import kr.co.platform.util.advice.exception.UserNotFoundException;
-import kr.co.platform.util.empty.Empty;
-import lombok.extern.slf4j.Slf4j;
+import kr.co.platform.exception.custom.DuplicatedException;
+import kr.co.platform.exception.custom.ForbiddenException;
+import kr.co.platform.exception.custom.UserNotFoundException;
+import kr.co.platform.util.validation.Empty;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-
-import java.security.SecureRandom;
-import java.util.Base64;
 
 @Service("signService")
 @RequiredArgsConstructor

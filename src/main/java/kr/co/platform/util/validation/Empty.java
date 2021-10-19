@@ -1,4 +1,4 @@
-package kr.co.platform.util.empty;
+package kr.co.platform.util.validation;
 
 import java.util.List;
 import java.util.Map;

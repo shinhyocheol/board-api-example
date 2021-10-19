@@ -1,9 +1,9 @@
 package kr.co.platform.config;
 
-import kr.co.platform.util.auth.CustomAccessDeniedPoint;
-import kr.co.platform.util.auth.CustomAuthenticationEntryPoint;
-import kr.co.platform.util.auth.JwtAuthProvider;
-import kr.co.platform.util.auth.JwtAuthenticationFilter;
+import kr.co.platform.util.auth.point.CustomAccessDeniedPoint;
+import kr.co.platform.util.auth.point.CustomAuthenticationEntryPoint;
+import kr.co.platform.util.auth.AuthProvider;
+import kr.co.platform.util.filter.CustomFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	private final JwtAuthProvider jwtAuthProvider;
+	private final AuthProvider jwtAuthProvider;
 	
 	@Bean
 	@Override
@@ -89,7 +89,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()
 			.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 				.and()
-			.addFilterBefore(new JwtAuthenticationFilter(jwtAuthProvider), UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(new CustomFilter(jwtAuthProvider), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 }

@@ -1,4 +1,4 @@
-package kr.co.platform.util.advice.exception;
+package kr.co.platform.exception.custom;
 
 public class AuthenticationEntryPointException extends RuntimeException {
 
