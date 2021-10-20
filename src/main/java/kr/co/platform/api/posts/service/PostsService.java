@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 
 import kr.co.platform.api.posts.domain.entity.PostsComment;
 import kr.co.platform.api.posts.dto.*;
-import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.exception.custom.ApiOtherException;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -27,7 +27,7 @@ public class PostsService {
     
     private final CommentRepository commentRepository;
 
-    private final CustomModelMapper modelMapper;
+    private final ModelMapper modelMapper;
 
     public Long regPosts(RegistPostsDto regPosts) {
     	
@@ -41,7 +41,7 @@ public class PostsService {
     	Page<Posts> entityList = postsRepository.findAll(pageble);
 
     	List<PostsResDto> result = entityList.stream()
-                .map(entity -> modelMapper.toMapping(entity, PostsResDto.class))
+                .map(entity -> modelMapper.map(entity, PostsResDto.class))
                 .collect(Collectors.toList());
 
         return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
@@ -52,13 +52,13 @@ public class PostsService {
     	Posts postsEntity = postsRepository.findById(id)
                 .orElseThrow(() -> new ApiOtherException("Posts Result Not Found"));
     	
-    	PostsResDto result = modelMapper.toMapping(postsEntity, PostsResDto.class);
+    	PostsResDto result = modelMapper.map(postsEntity, PostsResDto.class);
     	
     	// 게시글에 작성된 댓글 데이터 조회
     	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
     	
     	result.setComments(commentEntitys.stream()
-    			.map(commentEntity -> modelMapper.toMapping(commentEntity, CommentResDto.class))
+    			.map(commentEntity -> modelMapper.map(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
 
     	return result;

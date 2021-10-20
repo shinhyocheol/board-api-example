@@ -1,11 +1,11 @@
 package kr.co.platform.api.member.service;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import kr.co.platform.api.member.domain.entity.Members;
 import kr.co.platform.api.member.domain.repository.MemberRepository;
 import kr.co.platform.api.member.dto.MemberResultDto;
-import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.exception.custom.ApiOtherException;
 import lombok.RequiredArgsConstructor;
 
@@ -15,14 +15,14 @@ public class MemberService {
 	
 	private final MemberRepository memberRepository;
 	
-	private final CustomModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	public MemberResultDto getMemberById(Long id) {
 		
 		Members entity = memberRepository.findById(id)
 				.orElseThrow(() -> new ApiOtherException("Member Not Found"));
-		
-		return modelMapper.toMapping(entity, MemberResultDto.class);
+
+		return modelMapper.map(entity, MemberResultDto.class);
 	}
 	
 	

@@ -6,11 +6,11 @@ import kr.co.platform.api.member.domain.repository.MemberRepository;
 import kr.co.platform.api.sign.dto.AuthenticationDto;
 import kr.co.platform.api.sign.dto.JoinDto;
 import kr.co.platform.api.sign.dto.LoginDto;
-import kr.co.platform.model.CustomModelMapper;
 import kr.co.platform.exception.custom.DuplicatedException;
 import kr.co.platform.exception.custom.ForbiddenException;
 import kr.co.platform.exception.custom.UserNotFoundException;
 import kr.co.platform.util.validation.Empty;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class SignService {
 
 	private final BCryptPasswordEncoder passwordEncoder;
 	
-	private final CustomModelMapper modelMapper;
+	private final ModelMapper modelMapper;
 
 	public Boolean regMember(JoinDto joinDto) {
 
@@ -58,7 +58,7 @@ public class SignService {
 			throw new ForbiddenException("Passwords do not match");
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑
-		AuthenticationDto authentication = modelMapper.toMapping(member, AuthenticationDto.class);
+		AuthenticationDto authentication = modelMapper.map(member, AuthenticationDto.class);
 
 		return authentication;
 	}
