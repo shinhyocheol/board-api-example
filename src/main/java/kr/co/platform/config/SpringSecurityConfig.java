@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Configuration
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 
-	private final AuthProvider jwtAuthProvider;
+	private final AuthProvider authProvider;
 	
 	@Bean
 	@Override
@@ -37,35 +37,35 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 		return new BCryptPasswordEncoder();
 	} 
 	
-//	@Bean
-//	public CorsConfigurationSource corsConfigurationSource() {
-//
-//		CorsConfiguration configuration = new CorsConfiguration();
-//
-//		configuration.addAllowedOrigin("*");
-//		configuration.addAllowedMethod("*");
-//		configuration.addAllowedHeader("*");
-//		configuration.setMaxAge((long) 3600);
-//		configuration.setAllowCredentials(false);
-//		configuration.addExposedHeader("x-access-token");
-//		configuration.addExposedHeader("content-disposition");
-//
-//		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//		source.registerCorsConfiguration("/**", configuration);
-//
-//		return source;
-//	}
-//
-//	@Override
-//	public void configure(WebSecurity web) throws Exception {
-//
-//		web.ignoring().antMatchers(
-//				"/static/css/**",
-//				"/static/js/**",
-//				"/static/img/**",
-//				"/static/**"
-//				);
-//	}
+	@Bean
+	public CorsConfigurationSource corsConfigurationSource() {
+
+		CorsConfiguration configuration = new CorsConfiguration();
+
+		configuration.addAllowedOrigin("*");
+		configuration.addAllowedMethod("*");
+		configuration.addAllowedHeader("*");
+		configuration.setMaxAge((long) 3600);
+		configuration.setAllowCredentials(false);
+		configuration.addExposedHeader("accessToken");
+		configuration.addExposedHeader("content-disposition");
+
+		UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+		source.registerCorsConfiguration("/**", configuration);
+
+		return source;
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+
+		web.ignoring().antMatchers(
+				"/static/css/**",
+				"/static/js/**",
+				"/static/img/**",
+				"/static/**"
+				);
+	}
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
@@ -78,7 +78,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 			.authorizeRequests()
 				.requestMatchers(CorsUtils::isPreFlightRequest).permitAll()
 					.antMatchers("/signup").permitAll()			// 회원가입
-					.antMatchers("/signin").permitAll() 		// 로그인
+					.antMatchers("/signin/**").permitAll() 		// 로그인
 					.antMatchers("/exception/**").permitAll() 	// 예외처리 포인트
 					.anyRequest().hasRole("USER")				// 이외 나머지는 USER 권한필요
 				.and()
@@ -88,7 +88,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter{
 				.and()
 			.exceptionHandling().authenticationEntryPoint(new CustomAuthenticationEntryPoint())
 				.and()
-			.addFilterBefore(new CustomFilter(jwtAuthProvider), UsernamePasswordAuthenticationFilter.class);
+			.addFilterBefore(new CustomFilter(authProvider), UsernamePasswordAuthenticationFilter.class);
 	}
 	
 }

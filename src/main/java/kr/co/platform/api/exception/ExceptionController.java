@@ -1,5 +1,6 @@
 package kr.co.platform.api.exception;
 
+import kr.co.platform.exception.custom.ForbiddenException;
 import org.springframework.http.ResponseEntity;
 
 import org.springframework.security.access.AccessDeniedException;
@@ -26,6 +27,6 @@ public class ExceptionController {
      */
     @RequestMapping(value = {"/accessdenied"})
     public ResponseEntity<String> accessdeniedException() {    	
-        throw new AccessDeniedException("Access Deniend");
+        throw new ForbiddenException("Access Deniend");
     }
 }

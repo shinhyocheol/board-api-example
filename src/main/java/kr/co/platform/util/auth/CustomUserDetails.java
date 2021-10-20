@@ -37,6 +37,7 @@ public class CustomUserDetails implements UserDetails {
         List<String> roleList = new ArrayList<String>();
         roleList.add("ROLE_" + role);
 
+        this.roles = roleList;
     }
 
     @Override

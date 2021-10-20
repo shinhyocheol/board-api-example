@@ -26,7 +26,7 @@ public class RegistPostsDto {
 				.build();
 		
 		Posts postsBuild = Posts.builder()
-				.author(AuthUtil.getNickname())
+				.author(memberEntity.getNickname())
 				.title(title)
 				.content(content)
 				.member(memberEntity)

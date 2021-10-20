@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class MemberController {
 
-	private MemberService memberService;
+	private final MemberService memberService;
 	
 	/**
 	 * @method 설명 : ID에 해당되는 회원의 상세정보를 요청한다.

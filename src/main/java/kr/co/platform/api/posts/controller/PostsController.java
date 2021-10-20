@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 import kr.co.platform.api.posts.service.PostsService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @RestController

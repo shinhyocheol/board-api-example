@@ -12,8 +12,6 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import lombok.AllArgsConstructor;
-
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
@@ -21,7 +19,7 @@ public class SignController {
 
 	private final SignService apiSignService;
 	
-	private final AuthProvider jwtProvider;
+	private final AuthProvider authProvider;
 
 	/**
 	 * @method 설명 : 회원가입
@@ -48,7 +46,7 @@ public class SignController {
 		AuthenticationDto authentication = apiSignService.loginMember(loginDto);
 
 		return ResponseEntity.ok()
-				.header("x-access-token", jwtProvider
+				.header("accesstoken", authProvider
 						.createToken(
 							authentication.getId(),
 							authentication.getEmail(),

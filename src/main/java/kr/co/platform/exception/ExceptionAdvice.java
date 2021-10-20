@@ -53,9 +53,7 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(result.get(0).toString());
     }
 
-    @ExceptionHandler({
-            UserNotFoundException.class,
-            AuthenticationEntryPointException.class})
+    @ExceptionHandler({AuthenticationEntryPointException.class})
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     public ResponseEntity<String> accessDeniedException(Exception e) throws Exception {
         e.printStackTrace();
@@ -82,7 +80,7 @@ public class ExceptionAdvice {
 
     @ExceptionHandler({NotFoundException.class, UserNotFoundException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<String> forbiddenException(NotFoundException e) throws Exception {
+    public ResponseEntity<String> notFoundException(NotFoundException e) throws Exception {
         e.printStackTrace();
 
         Map<String, Object> resultMap = new HashMap<String, Object>();

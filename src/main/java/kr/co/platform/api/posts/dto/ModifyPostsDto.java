@@ -33,7 +33,7 @@ public class ModifyPostsDto {
     	
         Posts build = Posts.builder()
                 .id(id)
-                .author(AuthUtil.getNickname())
+                .author(memberEntity.getNickname())
                 .title(title)
                 .content(content)
                 .member(memberEntity)
