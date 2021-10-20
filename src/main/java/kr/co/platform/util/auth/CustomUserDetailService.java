@@ -19,9 +19,9 @@ public class CustomUserDetailService implements UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
 
         Members entity = memberRepository.findByEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("There is no result data"));
+                .orElseThrow(() -> new UserNotFoundException("존재하지 않는 회원의 정보입니다."));
 
-        UserDetails member = new CustomUserDetails(entity.getId(), email, entity.getNickname());
+        UserDetails member = new CustomUserDetails(entity.getId(), email, "USER");
 
         return member;
     }

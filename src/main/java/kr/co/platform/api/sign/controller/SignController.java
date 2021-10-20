@@ -7,6 +7,7 @@ import kr.co.platform.api.sign.dto.JoinDto;
 import kr.co.platform.api.sign.dto.LoginDto;
 import kr.co.platform.api.sign.service.SignService;
 import kr.co.platform.util.auth.AuthProvider;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +15,13 @@ import org.springframework.web.bind.annotation.*;
 import lombok.AllArgsConstructor;
 
 @RestController
-@AllArgsConstructor
+@RequiredArgsConstructor
 @RequestMapping(value = {""}, produces = MediaType.APPLICATION_JSON_VALUE)
 public class SignController {
 
-	private SignService apiSignService;
+	private final SignService apiSignService;
 	
-	private AuthProvider jwtProvider;
+	private final AuthProvider jwtProvider;
 
 	/**
 	 * @method 설명 : 회원가입
@@ -51,7 +52,7 @@ public class SignController {
 						.createToken(
 							authentication.getId(),
 							authentication.getEmail(),
-							authentication.getNickname()))
+							"USER"))
 				.body(authentication);
 	}
 }

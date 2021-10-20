@@ -19,20 +19,24 @@ import java.util.stream.Collectors;
 public class CustomUserDetails implements UserDetails {
 
     private long id;
-    private String username;
-    private String password;
-    private String nickname;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+    private String username;
+
+    private String password;
+
     private List<String> roles = new ArrayList<>();
 
     public CustomUserDetails(
             long id,
             String email,
-            String nickname) {
+            String role) {
+
         this.id = id;
         this.username = email;
-        this.nickname = nickname;
+
+        List<String> roleList = new ArrayList<String>();
+        roleList.add("ROLE_" + role);
+
     }
 
     @Override
@@ -42,29 +46,39 @@ public class CustomUserDetails implements UserDetails {
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
 
-        roles.add(new SimpleGrantedAuthority("ROLE_USER"));
-
         return roles;
 
     }
 
+    // 계정 만료여부
     @Override
     public boolean isAccountNonExpired() {
+        // true : 만료되지 않음
+        // false : 만료됨
         return true;
     }
 
+    // 계정 잠김 여부
     @Override
     public boolean isAccountNonLocked() {
+        // true : 잠기지 않음
+        // false : 잠김
         return true;
     }
 
+    // 비밀번호 잠김 여부
     @Override
     public boolean isCredentialsNonExpired() {
+        // true : 잠기지 않음
+        // false : 잠김
         return true;
     }
 
+    // 계정 활성화 여부
     @Override
     public boolean isEnabled() {
+        // true : 활성화 상태
+        // false : 비활성화 상태
         return true;
     }
 }

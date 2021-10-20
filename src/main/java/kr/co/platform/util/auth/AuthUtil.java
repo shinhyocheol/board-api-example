@@ -17,11 +17,6 @@ public class AuthUtil {
         return principal.getUsername();
     }
 
-    public static String getNickname() {
-        CustomUserDetails principal = (CustomUserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        return principal.getNickname();
-    }
-
     public static boolean hasRole(String role) {
         @SuppressWarnings("unchecked")
         Collection<GrantedAuthority> authorities = (Collection<GrantedAuthority>) SecurityContextHolder.getContext()

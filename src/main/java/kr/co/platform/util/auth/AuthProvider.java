@@ -35,7 +35,7 @@ public class AuthProvider {
     public String createToken(
             Long id,
             String username,
-            String nickname) {
+            String role) {
     	
     	/**
     	 * 토큰발급을 위한 데이터는 UserDetails에서 담당
@@ -44,7 +44,7 @@ public class AuthProvider {
     	CustomUserDetails user = new CustomUserDetails(
                 id, 			// 번호
                 username,		// 이메일
-                nickname);	    // 닉네임
+                role);	        // 권한
     	
     	// 유효기간설정을 위한 Date 객체 선언
     	Date date = new Date();
@@ -52,11 +52,10 @@ public class AuthProvider {
         final JwtBuilder builder = Jwts.builder()
                 .setHeaderParam("typ", "JWT")                                                   // 토큰 타입
                 .setSubject("x-access-token").setExpiration(new Date(date.getTime() + (1000L*60*60*12)))    // 토큰 유효시간 설정
-                .claim("id", id)
-                .claim("email", username)
-                .claim("nickname", nickname)
-                .claim("roles", user.getAuthorities())
-                .signWith(SignatureAlgorithm.HS256, signatureKey);                                           // 토큰 시그니쳐 설정
+                .claim("id", id)                                                                      // 유저 ID
+                .claim("email", username)                                                             // 유저 이메일
+                .claim("roles", role)                                                                 // 유저 권한
+                .signWith(SignatureAlgorithm.HS256, signatureKey);                                          // 토큰 시그니쳐 설정
 
         return builder.compact();
     }
@@ -77,9 +76,9 @@ public class AuthProvider {
 
         long id = claims.get("id", Integer.class);
         String email = claims.get("email", String.class);
-        String nickname = claims.get("nickname", String.class);
+        String role = claims.get("role", String.class);
 
-        CustomUserDetails userDetails = new CustomUserDetails(id, email, nickname);
+        CustomUserDetails userDetails = new CustomUserDetails(id, email, role);
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
     }
 
