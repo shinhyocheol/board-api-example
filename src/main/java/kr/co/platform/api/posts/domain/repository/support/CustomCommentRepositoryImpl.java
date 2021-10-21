@@ -41,7 +41,7 @@ public class CustomCommentRepositoryImpl extends QuerydslRepositorySupport imple
 					.leftJoin(postsComment.posts, posts)
 				.where(postsComment.posts.id.eq(postsId))
 				.orderBy(
-					postsComment.groupNo.asc(), 
+					postsComment.groupNo.desc(),
 					postsComment.depthNo.desc(),
 					postsComment.createdDate.desc()
 				)

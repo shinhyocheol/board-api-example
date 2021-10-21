@@ -64,9 +64,18 @@ public class PostsService {
     	return result;
     }
 
+    @Transactional
     public void setPosts(ModifyPostsDto setPosts) {
 
-        postsRepository.save(setPosts.toEntity());
+        // 게시글 데이터 먼저 뽑아온 후
+        Posts entity = postsRepository.findById(setPosts.getId())
+                .orElseThrow(() -> new ApiOtherException("해당 포스트가 존재하지 않습니다."));
+
+        // 메소드를 통해 해당 entity의 수정하고자 하는 데이터를 파라미터로 전달
+        // @Transactional 어노테이션으로 entity는 영속성을 가지게 되고, 변화가 일어나는 순간
+        // 데이터베이스에 반영한다.
+        entity.modifyPostsById(setPosts.getId(), setPosts.getTitle(), setPosts.getContent());
+
 
     }
 

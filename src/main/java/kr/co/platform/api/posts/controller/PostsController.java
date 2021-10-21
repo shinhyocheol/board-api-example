@@ -110,8 +110,10 @@ public class PostsController {
 	 */
 	@PostMapping(value = {"/{postId}/comment/{commentId}"})
 	public void regReplyByComment(
+			@PathVariable Long postsId,
 			@PathVariable Long commentId,
 			@Valid @RequestBody RegistReplyDto regReply) {
+		
 		postsService.regReplyByComment(regReply);
 	}
 	

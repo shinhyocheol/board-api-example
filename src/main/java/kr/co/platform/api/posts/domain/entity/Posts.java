@@ -22,16 +22,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @DynamicUpdate
 @DynamicInsert
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @EntityListeners(AuditingEntityListener.class)
 public class Posts{
 
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	@Column(length = 10, nullable = false)
-	private String author;
 	
 	@Column(length = 100, nullable = false)
     private String title;
@@ -46,7 +43,7 @@ public class Posts{
     @LastModifiedDate
     private LocalDateTime modifiedDate;
 
-    @Column(length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
+    @Column(length = 1, columnDefinition = "char(1) default 'N'")
     private String isDeleted;
     
     @ManyToOne
@@ -58,12 +55,20 @@ public class Posts{
     private List<PostsComment> comment = new ArrayList<PostsComment>(); 
     
     @Builder
-    public Posts(Long id, String author, String title, String content, Members member) {
+    public Posts(Long id, String title, String content, Members member) {
         this.id = id;
-        this.author = author;
         this.title = title;
         this.content = content;
         this.member = member;
     }
-	
+
+    // 게시글 수정
+    public void modifyPostsById(
+            Long id,
+            String title,
+            String content) {
+        this.id = id;
+        this.title = title;
+        this.content = content;
+    }
 }

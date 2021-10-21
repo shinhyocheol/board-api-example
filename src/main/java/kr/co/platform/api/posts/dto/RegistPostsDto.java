@@ -24,15 +24,12 @@ public class RegistPostsDto {
 				.builder()
 				.id(AuthUtil.getId())
 				.build();
-		
-		Posts postsBuild = Posts.builder()
-				.author(memberEntity.getNickname())
+
+		return Posts.builder()
 				.title(title)
 				.content(content)
 				.member(memberEntity)
 				.build();
-		
-		return postsBuild;
 	}
 
 }

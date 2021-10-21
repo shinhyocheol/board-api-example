@@ -14,7 +14,6 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 public class ModifyPostsDto {
 
-
     @Min(1)
     private Long id;
 
@@ -23,22 +22,5 @@ public class ModifyPostsDto {
 
     @NotBlank(message = "'content' is a required input value")
     private String content;
-
-    public Posts toEntity() {
-    	
-    	Members memberEntity = Members
-    			.builder()
-    			.id(AuthUtil.getId())
-    			.build();
-    	
-        Posts build = Posts.builder()
-                .id(id)
-                .author(memberEntity.getNickname())
-                .title(title)
-                .content(content)
-                .member(memberEntity)
-                .build();
-        return build;
-    }
 
 }

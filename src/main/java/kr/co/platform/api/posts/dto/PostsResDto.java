@@ -18,7 +18,7 @@ public class PostsResDto {
 
     private Long id;
     
-    private String author;
+//    private String author;
     
     private String title;
     
