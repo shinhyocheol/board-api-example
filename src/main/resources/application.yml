@@ -1,0 +1,53 @@
+spring:
+  ## Method Config
+  mvc:
+    hiddenmethod:
+      filter:
+        enabled: true
+  jackson:
+    serialization:
+      fail-on-empty-beans: false
+  ## JPA Config
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    properties:
+      hibernate:
+        format_sql: true
+    open-in-view: false
+  ## 스프링에서 컴포넌트 탐색과정에서 발생하는 오버헤드를 감소시키기 위해 여러가지 정책을 추가했는데,
+  ## 그 중 하나가 중복으로 생성된 빈을 덮어쓰는 상황(재정의)을 강제적으로 제한한다는 것이다.
+  ## 따라서 동일한 이름을 가진 스프링 빈이 등록되면 BeanDefinitionOverrideException 이 발생한다.
+  ## Bean 재정의가 실수로 일어나는 것을 방지하기 위해 기본적으로 false값으로 설정되어있다.
+  ## 그러나 재정의를 의도했고, 해당 Bean에 의존하고자 하는 상황이 필요한 경우 아래 값을 true로 설정한다.
+  ## 다만 true로 설정하는 순간 의도하지 않은 재정의 된 Bean이 존재할 수 있으니 이러한 상황을 조심해야한다.
+  main:
+    allow-bean-definition-overriding: true
+
+datasource:
+  master:
+    initialize: true
+    jdbc-url: "jdbc:mysql://127.0.0.1:3306/platform?serverTimezone=Asia/Seoul&characterEncoding=UTF-8"
+    username: "root"
+    password: "1234"
+
+## logging
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: debug
+        type:
+          descriptor:
+            sql: trace
+    kr:
+      co:
+        platform: debug
+
+## JWT Custom
+jwt:
+  secret:
+    signature: "SHINHYOCHEOL"

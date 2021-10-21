@@ -5,28 +5,23 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Component
 public class AuthProvider {
 
-    private static final String BEARER_TYPE = "bearer";
+    private static final String BEARER_TYPE = "bearer ";
     private static final String AUTHORITIES_KEY = "auth";
     private static final String ACCESS_USER_ID = "id";
     private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000L * 60 * 60 * 12;
 
-    @Value("${spring.jwt.secret.signature}")
+    @Value("${jwt.secret.signature}")
     private String signatureKey;
 
     @PostConstruct
@@ -55,7 +50,7 @@ public class AuthProvider {
                 .claim(ACCESS_USER_ID, id)
                 .signWith(SignatureAlgorithm.HS256, signatureKey);
 
-        return BEARER_TYPE + " " + builder.compact();
+        return BEARER_TYPE + builder.compact();
     }
 
     // 토큰에서 회원 정보 추출
@@ -87,7 +82,7 @@ public class AuthProvider {
         if (request.getHeader("accesstoken") == null)
             return null;
 
-        return request.getHeader("accesstoken").replace("bearer ", "");
+        return request.getHeader("accesstoken").replace(BEARER_TYPE, "");
     }
 
     /**
