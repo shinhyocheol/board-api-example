@@ -113,7 +113,7 @@ public class PostsController {
 			@PathVariable Long postsId,
 			@PathVariable Long commentId,
 			@Valid @RequestBody RegistReplyDto regReply) {
-		
+
 		postsService.regReplyByComment(regReply);
 	}
 	
