@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.access.AccessDeniedException;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -78,7 +79,11 @@ public class ExceptionAdvice {
         return ResponseEntity.status(HttpStatus.FORBIDDEN).body(result.get(0).toString());
     }
 
-    @ExceptionHandler({NotFoundException.class, UserNotFoundException.class})
+    @ExceptionHandler({
+            NotFoundException.class,
+            UserNotFoundException.class,
+            EntityNotFoundException.class
+    })
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<String> notFoundException(NotFoundException e) throws Exception {
         e.printStackTrace();
