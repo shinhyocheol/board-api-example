@@ -106,25 +106,25 @@ class SpringJpaApplicationTests {
 //
 //	}
 	
-	@Test
-	void contextLoads_댓글_등록테스트() throws Exception {
-		
-		RegistCommentDto comment = new RegistCommentDto();
-		comment.setComment("대댓글 등록22222222");
-		
-		comment.setGroupNo((long)0);
-		comment.setDepthNo((long)1);
-		comment.setPostsId((long)19);
-		
-		String content = objectMapper.writeValueAsString(comment);
-		
-		mockMvc.perform(post("/posts/19/comment")
-				.content(content)
-				.contentType(MediaType.APPLICATION_JSON)
-				.accept(MediaType.APPLICATION_JSON))
-				.andDo(print())
-				.andExpect(status().isOk());
-	}
+//	@Test
+//	void contextLoads_댓글_등록테스트() throws Exception {
+//
+//		RegistCommentDto comment = new RegistCommentDto();
+//		comment.setComment("대댓글 등록22222222");
+//
+//		comment.setGroupNo((long)0);
+//		comment.setDepthNo((long)1);
+//		comment.setPostsId((long)19);
+//
+//		String content = objectMapper.writeValueAsString(comment);
+//
+//		mockMvc.perform(post("/posts/19/comment")
+//				.content(content)
+//				.contentType(MediaType.APPLICATION_JSON)
+//				.accept(MediaType.APPLICATION_JSON))
+//				.andDo(print())
+//				.andExpect(status().isOk());
+//	}
 
 	
 	
