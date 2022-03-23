@@ -39,10 +39,10 @@ public class Members{
 	@Column(length = 100, nullable = false)
 	private String mobile;
 
-	@Column(length = 100, nullable = true)
+	@Column(length = 100)
 	private String nickname;
 	
-	@Column(length = 200, nullable = true)
+	@Column(length = 200)
 	private String profile;
 
 	@Column(length = 1, nullable = false, columnDefinition = "char(1) default 'N'")
@@ -57,11 +57,11 @@ public class Members{
 
 	// 게시글 Entity 연관관계 설정(One(회원 Entity) To Many(게시글 Entity)
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<Posts> posts = new ArrayList<Posts>();
+	private List<Posts> posts = new ArrayList<>();
 
 	// 댓글 Entity 연관관계 설정(One(회원 Entity) To Many(댓글 Entity)
 	@OneToMany(mappedBy = "member", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List<PostsComment> postsComment = new ArrayList<PostsComment>();
+	private List<PostsComment> postsComment = new ArrayList<>();
 
 	@Builder
 	public Members(Long id, String email, 

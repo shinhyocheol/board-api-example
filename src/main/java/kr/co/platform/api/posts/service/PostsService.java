@@ -32,10 +32,8 @@ public class PostsService {
     private final ModelMapper modelMapper;
 
     public Long regPosts(RegistPostsDto regPosts) {
-    	
-        Long insertId = postsRepository.save(regPosts.toEntity()).getId();
 
-        return insertId;
+        return postsRepository.save(regPosts.toEntity()).getId();
     }
     
     public PageImpl<PostsResDto> getPosts(PageRequest pageble) {
@@ -46,7 +44,7 @@ public class PostsService {
                 .map(entity -> modelMapper.map(entity, PostsResDto.class))
                 .collect(Collectors.toList());
 
-        return new PageImpl<PostsResDto>(result, pageble, entityList.getTotalElements());
+        return new PageImpl<>(result, pageble, entityList.getTotalElements());
     }
     
     public PostsResDto getPostsById(Long id) {
@@ -57,9 +55,7 @@ public class PostsService {
     	PostsResDto result = modelMapper.map(postsEntity, PostsResDto.class);
     	
     	// 게시글에 작성된 댓글 데이터 조회
-    	List<PostsComment> commentEntitys = commentRepository.findByPostsId(id);
-    	
-    	result.setComments(commentEntitys.stream()
+        result.setComments(commentRepository.findByPostsId(id).stream()
     			.map(commentEntity -> modelMapper.map(commentEntity, CommentResDto.class))
     			.collect(Collectors.toList()));
 

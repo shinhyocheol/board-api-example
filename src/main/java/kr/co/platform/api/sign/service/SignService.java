@@ -58,9 +58,8 @@ public class SignService {
 			throw new ForbiddenException("Passwords do not match");
 
 		// 회원정보를 인증클래스 객체(authentication)로 매핑
-		AuthenticationDto authentication = modelMapper.map(member, AuthenticationDto.class);
 
-		return authentication;
+		return modelMapper.map(member, AuthenticationDto.class);
 	}
 
 }
